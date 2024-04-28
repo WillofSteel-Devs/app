@@ -12,7 +12,6 @@ class Player(NamedTuple):
     units: dict[UnitType, int]
     npc_level: int
     last_npc_win: datetime | None
-    votes: int
     queue_slots: int
     alliance: Alliance
     silver: int
@@ -23,35 +22,36 @@ class Player(NamedTuple):
     prestige: int
 
     @staticmethod
-    def from_database(row, alliance_data):
-        if row is None:
+    def from_data(data, alliance_data):
+        if data is None:
             return None
+        
         return Player(
-            id=row[0],
-            registered_at=row[1],
-            gold=row[2],
-            ruby=row[3],
+            id=data["id"],
+            registered_at=datetime.fromisoformat(data["registered_at"]),
+            gold=data["gold"],
+            ruby=data["ruby"],
             units={
-                UnitType.INFANTRY: row[4],
-                UnitType.CAVALRY: row[5],
-                UnitType.ARTILLERY: row[6],
-                UnitType.ASSASSINS: row[7],
-                UnitType.BOWMEN: row[8],
-                UnitType.BIG_BOWMEN: row[9],
-                UnitType.HEAVY_MEN: row[10],
-                UnitType.KINGS_GUARDS: row[11],
+                UnitType.INFANTRY: data["units"]["infantry"],
+                UnitType.CAVALRY: data["units"]["cavalry"],
+                UnitType.ARTILLERY: data["units"]["artillery"],
+                UnitType.ASSASSINS: data["units"]["assassins"],
+                UnitType.BOWMEN: data["units"]["bowmen"],
+                UnitType.BIG_BOWMEN: data["units"]["big_bowmen"],
+                UnitType.HEAVY_MEN: data["units"]["heavy_men"],
+                UnitType.KINGS_GUARDS: data["units"]["kings_guards"]
             },
-            npc_level=row[12],
-            last_npc_win=row[13],
-            votes=row[14],
+            npc_level=data["npc_level"],
+            last_npc_win=datetime.fromisoformat(data["last_npc_win"]),
+            votes=data["votes"],
             alliance=alliance_data,
-            queue_slots=row[16],
-            silver=row[17],
-            observer=True if row[18] == 1 else False,
-            peace=row[19],
-            letter_bird=True if row[20] == 1 else False,
-            food_stored=row[21],
-            prestige=row[22]
+            queue_slots=data["queue_slots"],
+            silver=data["silver"],
+            observer=data["observer"],
+            peace=data["peace"],
+            letter_bird=data["letter_bird"],
+            food_stored=data["food_stored"],
+            prestige=data["prestige"]
         )
 
 class EventPlayer(NamedTuple):
