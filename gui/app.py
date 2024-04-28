@@ -1,9 +1,9 @@
 import tkinter
-from gui.attack_frame import AttackFrame
-from gui.lookup_frame import LookupFrame
-from gui.npc_frame import NpcFrame
-from gui.recruitment_frame import RecruitmentFrame
-from gui.construction_frame import ConstructionFrame
+from gui.frames.attack import AttackFrame
+from gui.frames.lookup import LookupFrame
+from gui.frames.npc import NpcFrame
+from gui.frames.recruitment import RecruitmentFrame
+from gui.frames.construction import ConstructionFrame
 
 class App(tkinter.Tk):
 
