@@ -1,28 +1,42 @@
 import tkinter
-from attack_frame import AttackFrame
-from lookup_frame import LookupFrame
-from npc_frame import NpcFrame
-from recruitment_frame import RecruitmentFrame
-from construction_frame import ConstructionFrame
+from gui.sidebar import Sidebar
+from gui.frames.attack import AttackFrame
+from gui.frames.lookup import LookupFrame
+from gui.frames.npc import NpcFrame
+from gui.frames.recruitment import RecruitmentFrame
+from gui.frames.construction import ConstructionFrame
+from gui.frames.settings import SettingsFrame
 
 class App(tkinter.Tk):
 
     def __init__(self):
         tkinter.Tk.__init__(self)
         self.title("My App")
-        self.geometry("400x200")
-        self.label = tkinter.Label(self, text="Hello, world!")
-        self.label.pack()
+        self.geometry("800x600")
+        self.resizable(False, False)
+        
+        self.sidebar = Sidebar(self)
 
         self.attack_frame = AttackFrame(self)
         self.lookup_frame = LookupFrame(self)
         self.npc_frame = NpcFrame(self)
         self.recruitment_frame = RecruitmentFrame(self)
         self.construction_frame = ConstructionFrame(self)
+        self.settings_frame = SettingsFrame(self)
+
+        self.current_frame = self.lookup_frame
+        self.change_frame(self.current_frame)
+
+        self.sidebar.place(x=0, y=0, height=600, width=150)
+
 
 
     def change_frame(self, frame):
-        pass
+        self.current_frame.place_forget()
+        self.current_frame = frame
+        self.current_frame.place(x=150, y=0, height=600, width=650)
+        self.current_frame.render()
+
 
 if __name__ == "__main__":
     app = App()
