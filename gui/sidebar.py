@@ -3,10 +3,10 @@ from gui.components import labels, buttons
 
 class Sidebar(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent, width=150, height=600, bg='#000000')
+        super().__init__(parent, width=150, height=600, bg='#BEB7A4')
         self.parent = parent
 
-        self.title = tkinter.Label(self, text="Sidebar")
+        self.title = labels.SidebarLabel(self, text="Sidebar")
         self.title.pack()
         
         self.npc_button = buttons.Sidebarbutton(self, text="NPC", command=lambda: self.switch_frame(self.parent.npc_frame))
