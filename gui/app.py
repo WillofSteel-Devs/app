@@ -4,6 +4,7 @@ from gui.frames.lookup import LookupFrame
 from gui.frames.npc import NpcFrame
 from gui.frames.recruitment import RecruitmentFrame
 from gui.frames.construction import ConstructionFrame
+from gui.frames.settings import SettingsFrame
 
 class App(tkinter.Tk):
 
@@ -19,6 +20,7 @@ class App(tkinter.Tk):
         self.npc_frame = NpcFrame(self)
         self.recruitment_frame = RecruitmentFrame(self)
         self.construction_frame = ConstructionFrame(self)
+        self.settings_frame = SettingsFrame(self)
 
         self.current_frame = self.lookup_frame
 
