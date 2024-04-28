@@ -1,5 +1,5 @@
 import requests # this is a synchronous application
-from models import Player
+from models import Player, Alliance
 
 API_URL = "https://api.willofsteel.me"
 
@@ -42,3 +42,10 @@ class API:
         data = response.json()
         player = Player.from_data(data, None)
         return player
+    
+    def get_alliance(self) -> Alliance:
+        route = Route("/alliance", "GET")
+        response = self.request(route)
+        data = response.json()
+        alliance = Alliance.from_data(data)
+        return alliance
