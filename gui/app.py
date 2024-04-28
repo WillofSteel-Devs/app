@@ -24,13 +24,14 @@ class App(tkinter.Tk):
         self.settings_frame = SettingsFrame(self)
 
         self.current_frame = self.lookup_frame
+        self.change_frame(self.current_frame)
 
         self.sidebar.grid(row=0, column=0)
 
 
 
     def change_frame(self, frame):
-        self.current_frame.pack_forget()
+        self.current_frame.grid_forget()
         self.current_frame = frame
         self.current_frame.grid(row=0, column=1)
         self.current_frame.render()
