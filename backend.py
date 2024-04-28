@@ -1,4 +1,5 @@
 import requests # this is a synchronous application
+from models import Player
 
 API_URL = "https://api.willofsteel.me"
 
@@ -8,7 +9,7 @@ class Route:
         self.method = method.upper()
 
     def __str__(self):
-        return f"Route({self.method} {self.path})"
+        return self.path
 
     def __repr__(self):
         return f"Route({self.method} {self.path})"
@@ -26,10 +27,18 @@ class API:
             "API-Key": api_key
         }
 
-    def get_player(self):
+    def request(self, route: Route, data: dict = None):
+        response = requests.request(route.method, route.path, headers=self.headers, json=data)
+        if response.status_code == 403:
+            raise Exception("Access Forbidden")
+            # handle error here however you want to
+            # error 403 & 401 are Access Forbidden
+
+        return response
+
+    def get_player(self) -> Player:
         route = Route("/player", "GET")
-        response = requests.get(route.path, headers=self.headers)
-        if response.status_code == 200:
-            return response.json()
-        # handle error here. ONLY error here is 403 Access Forbidden
-        # this status code is soon to be changed to 401 Access Forbidden so handle both of them the same way
+        response = self.request(route)
+        data = response.json()
+        player = Player.from_data(data, None)
+        return player
