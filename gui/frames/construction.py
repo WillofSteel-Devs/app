@@ -10,4 +10,4 @@ class ConstructionFrame(tkinter.Frame):
         self.label = labels.FrameLabel(self, "Construction")
 
     def render(self):
-            self.label.grid(row=0, column=0)
+        self.label.grid(row=0, column=0)
