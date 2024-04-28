@@ -1,9 +1,9 @@
 import tkinter
-from attack_frame import AttackFrame
-from lookup_frame import LookupFrame
-from npc_frame import NpcFrame
-from recruitment_frame import RecruitmentFrame
-from construction_frame import ConstructionFrame
+from gui.attack_frame import AttackFrame
+from gui.lookup_frame import LookupFrame
+from gui.npc_frame import NpcFrame
+from gui.recruitment_frame import RecruitmentFrame
+from gui.construction_frame import ConstructionFrame
 
 class App(tkinter.Tk):
 
@@ -20,9 +20,13 @@ class App(tkinter.Tk):
         self.recruitment_frame = RecruitmentFrame(self)
         self.construction_frame = ConstructionFrame(self)
 
+        self.current_frame = self.lookup_frame
+
 
     def change_frame(self, frame):
-        pass
+        self.current_frame.pack_forget()
+        self.current_frame = frame
+        self.current_frame.pack()
 
 if __name__ == "__main__":
     app = App()
