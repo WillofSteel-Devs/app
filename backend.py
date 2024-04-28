@@ -27,7 +27,7 @@ class API:
             "API-Key": api_key
         }
 
-    def request(self, route: Route, data: dict = None):
+    def request(self, route: Route, data: dict = None) -> dict:
         response = requests.request(route.method, route.path, headers=self.headers, json=data)
         if response.status_code == 403:
             raise Exception("Access Forbidden")
