@@ -2,9 +2,10 @@ import tkinter
 
 class Sidebar(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent)
+        super().__init__(parent, width=150, height=600, bg='#000000')
 
         self.title = tkinter.Label(self, text="Sidebar")
+        self.title.pack()
         
         self.npc_button = tkinter.Button(self, text="NPC")
         self.npc_button.pack()

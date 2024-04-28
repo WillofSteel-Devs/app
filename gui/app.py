@@ -12,7 +12,8 @@ class App(tkinter.Tk):
     def __init__(self):
         tkinter.Tk.__init__(self)
         self.title("My App")
-        self.geometry("400x200")
+        self.geometry("800x600")
+        self.resizable(False, False)
         
         self.sidebar = Sidebar(self)
 
@@ -26,14 +27,14 @@ class App(tkinter.Tk):
         self.current_frame = self.lookup_frame
         self.change_frame(self.current_frame)
 
-        self.sidebar.grid(row=0, column=0)
+        self.sidebar.place(x=0, y=0, height=600, width=150)
 
 
 
     def change_frame(self, frame):
-        self.current_frame.grid_forget()
+        self.current_frame.place_forget()
         self.current_frame = frame
-        self.current_frame.grid(row=0, column=1)
+        self.current_frame.place(x=150, y=0, height=600, width=650)
         self.current_frame.render()
 
 
