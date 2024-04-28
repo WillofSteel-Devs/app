@@ -1,0 +1,15 @@
+{
+    "colours": {
+        "main_background": "#12043b",
+        "button_active_background": "red",
+        "button_inactive_background": "blue",
+        "sidebar_background": "black",
+        "sidebar_text": "white",
+        "main_text": "white",
+        "button_text": "white"
+    },
+    "app_config": {
+        "auto_update": false,
+        "prompt_for_update": true
+    }
+}
