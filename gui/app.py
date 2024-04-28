@@ -1,4 +1,5 @@
 import tkinter
+from gui.sidebar import Sidebar
 from gui.frames.attack import AttackFrame
 from gui.frames.lookup import LookupFrame
 from gui.frames.npc import NpcFrame
@@ -12,8 +13,8 @@ class App(tkinter.Tk):
         tkinter.Tk.__init__(self)
         self.title("My App")
         self.geometry("400x200")
-        self.label = tkinter.Label(self, text="Hello, world!")
-        self.label.pack()
+        
+        self.sidebar = Sidebar(self)
 
         self.attack_frame = AttackFrame(self)
         self.lookup_frame = LookupFrame(self)
@@ -24,11 +25,16 @@ class App(tkinter.Tk):
 
         self.current_frame = self.lookup_frame
 
+        self.sidebar.grid(row=0, column=0)
+
+
 
     def change_frame(self, frame):
         self.current_frame.pack_forget()
         self.current_frame = frame
-        self.current_frame.pack()
+        self.current_frame.grid(row=0, column=1)
+        self.current_frame.render()
+
 
 if __name__ == "__main__":
     app = App()

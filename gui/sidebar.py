@@ -3,6 +3,8 @@ import tkinter
 class Sidebar(tkinter.Frame):
     def __init__(self, parent):
         super().__init__(parent)
+
+        self.title = tkinter.Label(self, text="Sidebar")
         
         self.npc_button = tkinter.Button(self, text="NPC")
         self.npc_button.pack()
@@ -16,4 +18,5 @@ class Sidebar(tkinter.Frame):
         self.recruitment_button = tkinter.Button(self, text="Recruitment")
         self.recruitment_button.pack()
 
-        self.pack(side=tkinter.LEFT)
+        self.lookup_button = tkinter.Button(self, text="Lookup")
+        self.lookup_button.pack()
