@@ -10,14 +10,14 @@ class Alliance(NamedTuple):
     bank: int
 
     @staticmethod
-    def from_database(row):
-        if row is None:
+    def from_data(data: dict):
+        if data is None:
             return None
         
         return Alliance(
-            owner = row[0],
-            created_at=row[1],
-            name=row[2],
-            user_limit=row[3],
-            bank=row[4]
+            owner = data["owner"],
+            created_at=datetime.fromisoformat(data["created_at"]),
+            name=data["name"],
+            user_limit=data["user_limit"],
+            bank=data["bank"]
         )
