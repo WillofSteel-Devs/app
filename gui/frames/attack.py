@@ -10,4 +10,4 @@ class AttackFrame(tkinter.Frame):
         self.label = labels.FrameLabel(self, "Attack")
     
     def render(self):
-            self.label.grid(row=0, column=0)
+        self.label.grid(row=0, column=0)

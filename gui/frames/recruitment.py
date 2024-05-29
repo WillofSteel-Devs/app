@@ -10,4 +10,4 @@ class RecruitmentFrame(tkinter.Frame):
         self.label = labels.FrameLabel(self, "Recruitment")
 
     def render(self):
-            self.label.grid(row=0, column=0)
+        self.label.grid(row=0, column=0)

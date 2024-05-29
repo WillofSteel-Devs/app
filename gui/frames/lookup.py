@@ -10,4 +10,4 @@ class LookupFrame(tkinter.Frame):
         self.label = FrameLabel(self, text="Lookup")
 
     def render(self):
-            self.label.grid(row=0, column=0)
+        self.label.grid(row=0, column=0)
