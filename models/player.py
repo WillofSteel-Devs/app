@@ -45,7 +45,7 @@ class Player(NamedTuple):
             npc_level=data["npc_level"],
             last_npc_win=Player._parse_date(data["last_npc_win"]),
             votes=data["votes"],
-            alliance=data["alliance"],
+            alliance=Alliance.from_data(data["alliance"]),
             queue_slots=data["queue_slots"],
             silver=data["silver"],
             observer=data["observer"],
