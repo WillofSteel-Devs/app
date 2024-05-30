@@ -23,7 +23,7 @@ class API:
         response = self.request(route)
         data = response.json()
         print(data)
-        player = Player.from_data(data, None)
+        player = Player.from_data(data)
         return player
     
     def get_alliance(self) -> Alliance:

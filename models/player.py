@@ -23,7 +23,7 @@ class Player(NamedTuple):
     prestige: int
 
     @staticmethod
-    def from_data(data, alliance_data):
+    def from_data(data):
         if data is None:
             return None
         
@@ -45,7 +45,7 @@ class Player(NamedTuple):
             npc_level=data["npc_level"],
             last_npc_win=Player._parse_date(data["last_npc_win"]),
             votes=data["votes"],
-            alliance=alliance_data,
+            alliance=data["alliance"],
             queue_slots=data["queue_slots"],
             silver=data["silver"],
             observer=data["observer"],
