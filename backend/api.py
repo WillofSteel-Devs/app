@@ -22,7 +22,6 @@ class API:
         route = Route("/player", "GET")
         response = self.request(route)
         data = response.json()
-        print(data)
         player = Player.from_data(data)
         return player
     
