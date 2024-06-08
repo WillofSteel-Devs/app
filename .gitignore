@@ -163,3 +163,6 @@ test.py
 
 # pre-commit hooks
 .pre-commit-config.yaml
+
+# ruff cache
+.ruff-cache/
