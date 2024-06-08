@@ -3,11 +3,15 @@ from typing import NamedTuple
 
 import emote
 
+__all__ = ["UnitType"]
+
+
 class UnitProperties(NamedTuple):
     name: str
     emote: str
     attack: int
     defense: int
+
 
 class UnitType(UnitProperties, Enum):
     INFANTRY = UnitProperties("Infantry", emote.INFANTRY, 30, 20)

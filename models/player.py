@@ -4,6 +4,9 @@ from typing import NamedTuple
 from .units import UnitType
 from .alliance import Alliance
 
+__all__ = ["Player", "EventPlayer"]
+
+
 class Player(NamedTuple):
     id: int
     registered_at: datetime
@@ -25,7 +28,7 @@ class Player(NamedTuple):
     def from_data(data, alliance_data):
         if data is None:
             return None
-        
+
         return Player(
             id=data["id"],
             registered_at=datetime.fromisoformat(data["registered_at"]),
@@ -39,7 +42,7 @@ class Player(NamedTuple):
                 UnitType.BOWMEN: data["units"]["bowmen"],
                 UnitType.BIG_BOWMEN: data["units"]["big_bowmen"],
                 UnitType.HEAVY_MEN: data["units"]["heavy_men"],
-                UnitType.KINGS_GUARDS: data["units"]["kings_guards"]
+                UnitType.KINGS_GUARDS: data["units"]["kings_guards"],
             },
             npc_level=data["npc_level"],
             last_npc_win=datetime.fromisoformat(data["last_npc_win"]),
@@ -51,8 +54,9 @@ class Player(NamedTuple):
             peace=data["peace"],
             letter_bird=data["letter_bird"],
             food_stored=data["food_stored"],
-            prestige=data["prestige"]
+            prestige=data["prestige"],
         )
+
 
 class EventPlayer(NamedTuple):
     user_id: int
@@ -65,8 +69,5 @@ class EventPlayer(NamedTuple):
         if row is None:
             return None
         return EventPlayer(
-            user_id=row[0],
-            event_points=row[1],
-            skins=row[2],
-            currently_wearing=row[3]
+            user_id=row[0], event_points=row[1], skins=row[2], currently_wearing=row[3]
         )

@@ -1,7 +1,8 @@
-import requests # this is a synchronous application
+import requests  # this is a synchronous application
 from models import Player, Alliance
 
 API_URL = "https://api.willofsteel.me"
+
 
 class Route:
     def __init__(self, path, method):
@@ -20,15 +21,16 @@ class Route:
     def __hash__(self):
         return hash((self.path, self.method))
 
+
 class API:
     def __init__(self, api_key: str):
         self.api_key = api_key
-        self.headers = {
-            "API-Key": api_key
-        }
+        self.headers = {"API-Key": api_key}
 
     def request(self, route: Route, data: dict = None) -> dict:
-        response = requests.request(route.method, route.path, headers=self.headers, json=data)
+        response = requests.request(
+            route.method, route.path, headers=self.headers, json=data
+        )
         if response.status_code == 403:
             raise Exception("Access Forbidden")
             # handle error here however you want to
@@ -42,7 +44,7 @@ class API:
         data = response.json()
         player = Player.from_data(data, None)
         return player
-    
+
     def get_alliance(self) -> Alliance:
         route = Route("/alliance", "GET")
         response = self.request(route)
