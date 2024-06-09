@@ -1,7 +1,9 @@
+from __future__ import annotations
+
 import requests
 from backend import Route
 from models import Player, Alliance
-
+from .exceptions import AccessForbidden, ValidationError
 from typing import Dict
 
 __all__ = ("API",)
@@ -27,9 +29,11 @@ class API:
             method, url, headers=headers, params=query_params, json=json, **kwargs
         )
         if response.status_code == 403:
-            raise Exception("Access Forbidden")
+            raise AccessForbidden(response.status_code)
             # handle error here however you want to
             # error 403 & 401 are Access Forbidden
+        elif response.status_code == 422:
+            raise ValidationError(response.status_code, json)
 
         return response
 
