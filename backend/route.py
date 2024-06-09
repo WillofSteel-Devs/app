@@ -1,7 +1,7 @@
-import requests # this is a synchronous application
-from models import Player, Alliance
-
 API_URL = "https://api.willofsteel.me"
+
+__all__ = ("Route",)
+
 
 class Route:
     def __init__(self, path, method):

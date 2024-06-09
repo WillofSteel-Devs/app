@@ -4,6 +4,8 @@ from models import Player, Alliance
 
 from typing import Dict
 
+__all__ = ("API",)
+
 
 class API:
     def __init__(self, api_key: str):
