@@ -50,3 +50,13 @@ class API:
         data = response.json()
         alliance = Alliance.from_data(data)
         return alliance
+
+    def recruit_troop(self, troop_type: str, amount: str, currency: str = "gold"):
+        route = Route("/recruit", "POST")
+        query_params = {
+            "troop_type": troop_type,
+            "amount": amount,
+            "currency": currency,
+        }  # will be moved to payload in the future - Neil
+        response = self.request(route, query_params=query_params)
+        return response.json()
