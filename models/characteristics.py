@@ -1,6 +1,6 @@
 from typing import NamedTuple
 
-__all__ = ["Characteristics"]
+__all__ = ("Characteristics",)
 
 
 class Characteristics(NamedTuple):
