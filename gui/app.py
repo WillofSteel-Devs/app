@@ -7,14 +7,14 @@ from gui.frames.recruitment import RecruitmentFrame
 from gui.frames.construction import ConstructionFrame
 from gui.frames.settings import SettingsFrame
 
-class App(tkinter.Tk):
 
+class App(tkinter.Tk):
     def __init__(self):
         tkinter.Tk.__init__(self)
         self.title("My App")
         self.geometry("800x600")
         self.resizable(False, False)
-        
+
         self.sidebar = Sidebar(self)
 
         self.attack_frame = AttackFrame(self)
@@ -28,8 +28,6 @@ class App(tkinter.Tk):
         self.change_frame(self.current_frame)
 
         self.sidebar.place(x=0, y=0, height=600, width=150)
-
-
 
     def change_frame(self, frame):
         self.current_frame.place_forget()

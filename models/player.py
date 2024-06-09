@@ -4,6 +4,9 @@ from typing import NamedTuple
 from .units import UnitType
 from .alliance import Alliance
 
+__all__ = ["Player", "EventPlayer"]
+
+
 class Player(NamedTuple):
     id: int
     registered_at: datetime
@@ -26,7 +29,7 @@ class Player(NamedTuple):
     def from_data(data):
         if data is None:
             return None
-        
+
         return Player(
             id=data["user_id"],
             registered_at=Player._parse_date(data["registered_at"]),
@@ -40,7 +43,7 @@ class Player(NamedTuple):
                 UnitType.BOWMEN: data["units"]["bowmen"],
                 UnitType.BIG_BOWMEN: data["units"]["big_bowmen"],
                 UnitType.HEAVY_MEN: data["units"]["heavy_men"],
-                UnitType.KINGS_GUARDS: data["units"]["kings_guards"]
+                UnitType.KINGS_GUARDS: data["units"]["kings_guards"],
             },
             npc_level=data["npc_level"],
             last_npc_win=Player._parse_date(data["last_npc_win"]),
@@ -52,9 +55,9 @@ class Player(NamedTuple):
             peace=data["peace"],
             letter_bird=data["letter_bird"],
             food_stored=data["food_stored"],
-            prestige=data["prestige"]
+            prestige=data["prestige"],
         )
-    
+
     # For handling the edge-case where the date returned by the api is null, most likely to occur with last_npc_win
     @staticmethod
     def _parse_date(date) -> datetime | None:
@@ -62,6 +65,7 @@ class Player(NamedTuple):
             date = datetime.fromisoformat(date)
         except TypeError:
             return None
+
 
 class EventPlayer(NamedTuple):
     user_id: int
@@ -74,8 +78,5 @@ class EventPlayer(NamedTuple):
         if row is None:
             return None
         return EventPlayer(
-            user_id=row[0],
-            event_points=row[1],
-            skins=row[2],
-            currently_wearing=row[3]
+            user_id=row[0], event_points=row[1], skins=row[2], currently_wearing=row[3]
         )

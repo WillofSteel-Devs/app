@@ -1,6 +1,8 @@
 from datetime import datetime
 from typing import NamedTuple
 
+__all__ = ["Alliance"]
+
 
 class Alliance(NamedTuple):
     owner: int
@@ -13,11 +15,11 @@ class Alliance(NamedTuple):
     def from_data(data: dict):
         if data is None:
             return None
-        
+
         return Alliance(
-            owner = data["owner"],
+            owner=data["owner"],
             created_at=datetime.fromisoformat(data["created_at"]),
             name=data["name"],
             user_limit=data["user_limit"],
-            bank=data["bank"]
+            bank=data["bank"],
         )

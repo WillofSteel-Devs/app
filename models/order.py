@@ -1,5 +1,8 @@
 from typing import NamedTuple
 
+__all__ = ["MarketOrder"]
+
+
 class MarketOrder(NamedTuple):
     uuid: str
     user_id: int
@@ -20,5 +23,5 @@ class MarketOrder(NamedTuple):
             order_type=row[3],
             price=row[4],
             amount=row[5],
-            fulfilled=row[6]
+            fulfilled=row[6],
         )
