@@ -5,6 +5,8 @@ from backend import Route
 from models import Player, Alliance
 from .exceptions import AccessForbidden, ValidationError
 
+__all__ = ("API",)
+
 
 class API:
     def __init__(self, api_key: str):
