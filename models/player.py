@@ -4,7 +4,7 @@ from typing import NamedTuple
 from .units import UnitType
 from .alliance import Alliance
 
-__all__ = ["Player", "EventPlayer"]
+__all__ = ("Player", "EventPlayer")
 
 
 class Player(NamedTuple):
