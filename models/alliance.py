@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import NamedTuple
 
-__all__ = ["Alliance"]
+__all__ = ("Alliance",)
 
 
 class Alliance(NamedTuple):

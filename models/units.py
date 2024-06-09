@@ -3,7 +3,7 @@ from typing import NamedTuple
 
 import emote
 
-__all__ = ["UnitType"]
+__all__ = ("UnitType",)
 
 
 class UnitProperties(NamedTuple):

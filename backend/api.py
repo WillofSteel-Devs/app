@@ -8,14 +8,30 @@ from .exceptions import AccessForbidden, ValidationError
 __all__ = ("API",)
 
 
+from typing import Dict
+
+__all__ = ("API",)
+
+
 class API:
     def __init__(self, api_key: str):
         self.api_key = api_key
-        self.headers = {"API-Key": api_key}
 
-    def request(self, route: Route, data: dict = None) -> dict:
+    def request(
+        self, route: Route, *, query_params: dict = None, json: dict = None, **kwargs
+    ):
+        method = route.method
+        url = route.url
+
+        headers: Dict[str, str] = {
+            "User-Agent": "WillofSteel API Client/1.0",
+            "Content-Type": "application/json",
+            "API-Key": self.api_key,
+        }
+
         response = requests.request(
-            route.method, route.path, headers=self.headers, json=data
+            method, url, headers=headers, params=query_params, json=json, **kwargs
+
         )
         if response.status_code == 403:
             raise AccessForbidden(response.status_code)

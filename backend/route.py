@@ -1,6 +1,6 @@
-__all__ = "Route"
-
 API_URL = "https://api.willofsteel.me"
+
+__all__ = ("Route",)
 
 
 class Route:

@@ -1,6 +1,6 @@
 from typing import NamedTuple
 
-__all__ = ["MarketOrder"]
+__all__ = ("MarketOrder",)
 
 
 class MarketOrder(NamedTuple):
