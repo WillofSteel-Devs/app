@@ -26,7 +26,7 @@ class Player(NamedTuple):
     prestige: int
 
     @staticmethod
-    def from_data(data):
+    def from_data(data: dict):
         if data is None:
             return None
 
@@ -59,8 +59,10 @@ class Player(NamedTuple):
         )
 
     # For handling the edge-case where the date returned by the api is null, most likely to occur with last_npc_win
-    @staticmethod
     def _parse_date(date) -> datetime | None:
+        if date is None:
+            return None
+
         try:
             date = datetime.fromisoformat(date)
         except TypeError:
