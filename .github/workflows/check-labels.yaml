@@ -19,4 +19,4 @@ jobs:
         with:
           mode: exactly
           count: 0
-          labels: "DO-NOT-MERGE, awaiting changes, awaiting change review"
+          labels: "DO-NOT-MERGE, awaiting changes, awaiting change review, awaiting core review, awaiting review"
