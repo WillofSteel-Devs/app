@@ -51,6 +51,18 @@ class API:
         alliance = Alliance.from_data(data)
         return alliance
 
+    def update_alliance_name(self, name: str):
+        route = Route("/alliance", "POST")
+        query_params = {"update_type": "name", "new_name": name}
+        response = self.request(route, query_params=query_params)
+        return response.json()
+
+    def update_alliance_user_limit(self, user_limit: int):
+        route = Route("/alliance", "POST")
+        query_params = {"update_type": "user_limit", "new_limit": user_limit}
+        response = self.request(route, query_params=query_params)
+        return response.json()
+
     def recruit_troop(self, troop_type: str, amount: str, currency: str = "gold"):
         route = Route("/recruit", "POST")
         query_params = {
