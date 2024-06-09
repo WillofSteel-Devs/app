@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import requests
 from backend import Route
-from models import Player, Alliance
+from models import Player, Alliance, Order
 from .exceptions import AccessForbidden, ValidationError
 from typing import Dict
 
@@ -72,3 +72,9 @@ class API:
         }  # will be moved to payload in the future - Neil
         response = self.request(route, query_params=query_params)
         return response.json()
+
+    def get_market_orders(self):
+        route = Route("/market", "GET")
+        response = self.request(route)
+        orders = [Order.from_data(order) for order in response.json()]
+        return orders
