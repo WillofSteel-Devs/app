@@ -1,5 +1,9 @@
 name: Linter
-on: [push, pull_request]
+on: 
+  push:
+  pull_request:
+    types: [opened, reopened, labeled, unlabeled, synchronize]
+
 jobs:
   ruff:
     runs-on: ubuntu-latest
