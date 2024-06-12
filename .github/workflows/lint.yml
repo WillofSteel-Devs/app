@@ -18,7 +18,7 @@ jobs:
       matrix:
         python-version: ['3.8', '3.10', '3.x']
 
-    name: Pylint
+    name: Pyright
     steps:
       - uses: actions/checkout@v3
         with:
