@@ -1,3 +1,4 @@
+# pyright: reportCallIssue=false, reportIncompatibleVariableOverride=false
 from enum import Enum
 from typing import NamedTuple
 

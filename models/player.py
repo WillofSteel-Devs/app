@@ -32,7 +32,7 @@ class Player(NamedTuple):
 
         return Player(
             id=data["user_id"],
-            registered_at=Player._parse_date(data["registered_at"]),
+            registered_at=Player._parse_date(data["registered_at"]),  # type: ignore
             gold=data["gold"],
             ruby=data["ruby"],
             units={
@@ -46,9 +46,9 @@ class Player(NamedTuple):
                 UnitType.KINGS_GUARDS: data["units"]["kings_guards"],
             },
             npc_level=data["npc_level"],
-            last_npc_win=Player._parse_date(data["last_npc_win"]),
+            last_npc_win=Player._parse_date(data["last_npc_win"]),  # type: ignore
             votes=data["votes"],
-            alliance=Alliance.from_data(data["alliance"]),
+            alliance=Alliance.from_data(data["alliance"]),  # type: ignore
             queue_slots=data["queue_slots"],
             silver=data["silver"],
             observer=data["observer"],
@@ -59,7 +59,7 @@ class Player(NamedTuple):
         )
 
     # For handling the edge-case where the date returned by the api is null, most likely to occur with last_npc_win
-    def _parse_date(date) -> datetime | None:
+    def _parse_date(self, date) -> datetime | None:
         if date is None:
             return None
 

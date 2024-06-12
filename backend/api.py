@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import requests
 from backend import Route
-from models import Player, Alliance, Order
+from models import Player, Alliance, MarketOrder
 from .exceptions import AccessForbidden, ValidationError
 from typing import Dict
 
@@ -14,7 +14,7 @@ class API:
         self.api_key = api_key
 
     def request(
-        self, route: Route, *, query_params: dict = None, json: dict = None, **kwargs
+        self, route: Route, *, query_params: dict = {}, json: dict = {}, **kwargs
     ):
         method = route.method
         url = route.url
@@ -37,14 +37,14 @@ class API:
 
         return response
 
-    def get_player(self) -> Player:
+    def get_player(self) -> Player | None:
         route = Route("/player", "GET")
         response = self.request(route)
         data = response.json()
         player = Player.from_data(data)
         return player
 
-    def get_alliance(self) -> Alliance:
+    def get_alliance(self) -> Alliance | None:
         route = Route("/alliance", "GET")
         response = self.request(route)
         data = response.json()
@@ -76,5 +76,5 @@ class API:
     def get_market_orders(self):
         route = Route("/market", "GET")
         response = self.request(route)
-        orders = [Order.from_data(order) for order in response.json()]
+        orders = [MarketOrder.from_data(order) for order in response.json()]
         return orders
