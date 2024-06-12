@@ -166,3 +166,4 @@ test.py
 
 # ruff cache
 .ruff-cache/
+.ruff*
