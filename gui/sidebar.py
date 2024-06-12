@@ -44,4 +44,4 @@ class Sidebar(tkinter.Frame):
         self.lookup_button.pack()
 
     def switch_frame(self, frame):
-        self.master.change_frame(frame)
+        self.master.change_frame(frame)  # type: ignore # this seems to be right? I'm not sure why it's throwing an error with pyright

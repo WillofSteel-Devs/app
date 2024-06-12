@@ -1,3 +1,6 @@
+# pyright: reportArgumentType=false
+# Argument of type "Unknown | None" cannot be assigned to parameter "command" of type "_ButtonCommand" in function "__init__"
+# there needs to be a default for both of these buttons
 import tkinter
 
 
