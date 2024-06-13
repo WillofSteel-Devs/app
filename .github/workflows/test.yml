@@ -1,0 +1,29 @@
+name: test
+
+on:
+  push:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.8', '3.x']
+
+    name: unittest (${{ matrix.python-version }})
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up CPython ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Run tests
+        shell: bash
+        run: python -m unittest discover -s tests -v
