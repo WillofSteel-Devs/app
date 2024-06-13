@@ -11,7 +11,7 @@ from gui.frames.settings import SettingsFrame
 class App(tkinter.Tk):
     def __init__(self):
         tkinter.Tk.__init__(self)
-        self.title("My App")
+        self.title("Will of Steel")
         self.geometry("800x600")
         self.resizable(False, False)
 

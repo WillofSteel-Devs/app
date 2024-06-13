@@ -1,10 +1,9 @@
 from __future__ import annotations
 
-import requests
+from aiohttp import ClientSession
 from backend import Route
 from models import Player, Alliance, MarketOrder
 from .exceptions import AccessForbidden, ValidationError
-from typing import Dict
 
 __all__ = ("API",)
 
@@ -13,21 +12,25 @@ class API:
     def __init__(self, api_key: str):
         self.api_key = api_key
 
-    def request(
+    async def setup(self):
+        self.session = ClientSession(
+            headers={
+                "User-Agent": "WillofSteel API Client/1.0",
+                "Content-Type": "application/json",
+                "API-Key": self.api_key,
+            }
+        )
+
+    async def request(
         self, route: Route, *, query_params: dict = {}, json: dict = {}, **kwargs
     ):
         method = route.method
         url = route.url
 
-        headers: Dict[str, str] = {
-            "User-Agent": "WillofSteel API Client/1.0",
-            "Content-Type": "application/json",
-            "API-Key": self.api_key,
-        }
-
-        response = requests.request(
-            method, url, headers=headers, params=query_params, json=json, **kwargs
-        )
+        async with self.session.request(
+            method, url, params=query_params, json=json, **kwargs
+        ) as response:
+            response = await response.json()
         if response.status_code == 403:
             raise AccessForbidden(response.status_code)
             # handle error here however you want to
@@ -37,44 +40,44 @@ class API:
 
         return response
 
-    def get_player(self) -> Player | None:
+    async def get_player(self) -> Player | None:
         route = Route("/player", "GET")
-        response = self.request(route)
-        data = response.json()
+        response = await self.request(route)
+        data = await response.json()
         player = Player.from_data(data)
         return player
 
-    def get_alliance(self) -> Alliance | None:
+    async def get_alliance(self) -> Alliance | None:
         route = Route("/alliance", "GET")
-        response = self.request(route)
-        data = response.json()
+        response = await self.request(route)
+        data = await response.json()
         alliance = Alliance.from_data(data)
         return alliance
 
-    def update_alliance_name(self, name: str):
+    async def update_alliance_name(self, name: str):
         route = Route("/alliance", "POST")
         query_params = {"update_type": "name", "new_name": name}
-        response = self.request(route, query_params=query_params)
-        return response.json()
+        response = await self.request(route, query_params=query_params)
+        return await response.json()
 
-    def update_alliance_user_limit(self, user_limit: int):
+    async def update_alliance_user_limit(self, user_limit: int):
         route = Route("/alliance", "POST")
         query_params = {"update_type": "user_limit", "new_limit": user_limit}
-        response = self.request(route, query_params=query_params)
-        return response.json()
+        response = await self.request(route, query_params=query_params)
+        return await response.json()
 
-    def recruit_troop(self, troop_type: str, amount: str, currency: str = "gold"):
+    async def recruit_troop(self, troop_type: str, amount: str, currency: str = "gold"):
         route = Route("/recruit", "POST")
         query_params = {
             "troop_type": troop_type,
             "amount": amount,
             "currency": currency,
         }  # will be moved to payload in the future - Neil
-        response = self.request(route, query_params=query_params)
-        return response.json()
+        response = await self.request(route, query_params=query_params)
+        return await response.json()
 
-    def get_market_orders(self):
+    async def get_market_orders(self):
         route = Route("/market", "GET")
-        response = self.request(route)
-        orders = [MarketOrder.from_data(order) for order in response.json()]
+        response = await self.request(route)
+        orders = [MarketOrder.from_data(order) for order in await response.json()]
         return orders
