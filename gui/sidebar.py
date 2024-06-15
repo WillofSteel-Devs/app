@@ -46,7 +46,7 @@ class Sidebar(tkinter.Frame):
         self.apiKey_button = buttons.Sidebarbutton(
             self,
             text="API Key",
-            command=lambda: self.switch_frame(self.parent.lookup_frame),
+            command=lambda: self.switch_frame(self.parent.api_key_frame),
         )
         self.apiKey_button.pack()
 
