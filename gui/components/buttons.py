@@ -14,3 +14,9 @@ class Sidebarbutton(tkinter.Button):
 class FrameButton(tkinter.Button):
     def __init__(self, parent, text="", command=None):
         super().__init__(parent, text=text, command=command, width=151, height=3)
+
+
+class SubmitButton(tkinter.Button):
+    def __init__(self, parent, text="", command=None, width=10, hight=5):
+        super().__init__(parent, text=text, command=command, width=width, height=hight)\
+        
