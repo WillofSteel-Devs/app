@@ -34,7 +34,7 @@ class App(tkinter.Tk):
             self.current_frame.render()
         else:
             self.sidebar.place(x=0, y=0, height=600, width=150)
-            self.current_frame = None
+            self.current_frame = self.lookup_frame
             self.build_main_frame()
 
     def build_main_frame(self):
