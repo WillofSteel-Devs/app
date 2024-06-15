@@ -6,6 +6,7 @@ from gui.frames.npc import NpcFrame
 from gui.frames.recruitment import RecruitmentFrame
 from gui.frames.construction import ConstructionFrame
 from gui.frames.settings import SettingsFrame
+from gui.frames.api_key import APIKeyFrame
 
 
 class App(tkinter.Tk):
@@ -23,8 +24,9 @@ class App(tkinter.Tk):
         self.recruitment_frame = RecruitmentFrame(self)
         self.construction_frame = ConstructionFrame(self)
         self.settings_frame = SettingsFrame(self)
+        self.api_key_frame = APIKeyFrame(self)
 
-        self.current_frame = self.lookup_frame
+        self.current_frame = self.api_key_frame
         self.change_frame(self.current_frame)
 
         self.sidebar.place(x=0, y=0, height=600, width=150)
@@ -34,7 +36,6 @@ class App(tkinter.Tk):
         self.current_frame = frame
         self.current_frame.place(x=150, y=0, height=600, width=650)
         self.current_frame.render()
-
 
 if __name__ == "__main__":
     app = App()
