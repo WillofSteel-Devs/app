@@ -6,7 +6,7 @@ from gui.frames.npc import NpcFrame
 from gui.frames.recruitment import RecruitmentFrame
 from gui.frames.construction import ConstructionFrame
 from gui.frames.settings import SettingsFrame
-from gui.frames.api_key_submit import APIKeyFrame
+from gui.frames.api_key import APIKeyFrame
 
 
 class App(tkinter.Tk):
@@ -36,7 +36,6 @@ class App(tkinter.Tk):
         self.current_frame = frame
         self.current_frame.place(x=150, y=0, height=600, width=650)
         self.current_frame.render()
-
 
 if __name__ == "__main__":
     app = App()
