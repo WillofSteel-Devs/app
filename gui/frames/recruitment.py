@@ -43,7 +43,7 @@ class RecruitmentFrame(tkinter.Frame):
             "gold",
         )
         if result.status_code != 200:
-            self.show_error(result)
+            self.show_error(result.json()["message"])
 
     def show_error(self, error: str):
         label = labels.PopUpLabel(
