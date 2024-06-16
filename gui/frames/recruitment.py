@@ -1,34 +1,47 @@
 import tkinter
-from ..components import labels, inputs, buttons
+from ..components import labels, dropdowns, inputs, buttons
 from backend.api import API
 
 
-class APIKeyFrame(tkinter.Frame):
+class RecruitmentFrame(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent, bg="yellow")
+        super().__init__(parent, bg="green")
         self.parent = parent
 
-        self.label = labels.FrameLabel(self, "API Key")
+        self.label = labels.FrameLabel(self, "Recruitment")
 
-        self.apikeyentrylabel = labels.InputLabel(self, "Enter API Key:")
-        self.apikeyentry = inputs.TextInput(self)
-        self.apikeysubmit = buttons.SubmitButton(
-            self, text="Submit", width=10, hight=1, command=self.submit_api_key
+        self.troopselectorlabel = labels.InputLabel(self, "Select Troop Type")
+        self.troopselector = dropdowns.Dropdown(
+            self,
+            options=[
+                "Infantry",
+                "Cavalry",
+                "Artillery",
+                "Assassin",
+                "Bowmen",
+                "Big Bowmen",
+                "Heavy Men",
+                "King Guards",
+            ],
         )
-        self.show_error("test")
+        self.troopquantityselectorlabel = labels.InputLabel(self, "Select Amount")
+        self.troopquantityselector = inputs.IntergerOnlyEntry(
+            self, minNumber=1, maxNumber=1000
+        )
+        self.recruitsubmit = buttons.SubmitButton(
+            self, text="Submit", width=10, height=1, command=self.submit_recruit
+        )
 
-    def submit_api_key(self):
-        api_key = self.apikeyentry.get()
-        backend = API(api_key)
-        valid = backend.verify_key()
-        if valid:
-            with open("API_KEY.txt", "w") as f:
-                f.write(self.apikeyentry.get())
-            self.parent.backend = backend
-            self.parent.build_main_frame()
-        else:
-            self.apikeyentry.delete(0, "end")
-            self.apikeyentry.insert(0, "Invalid API Key")
+    def submit_recruit(self):
+        with open("API_KEY.txt", "r") as f:
+            apiKey = f.read()
+
+        backend = API(apiKey)
+        result = backend.recruit_troop(
+            self.troopselector.get_selection(), self.troopquantityselector.get(), "gold"
+        )
+        if result != 200:
+            self.show_error(self, result)
 
     def show_error(self, error: str):
         label = labels.PopUpLabel(
@@ -39,7 +52,8 @@ class APIKeyFrame(tkinter.Frame):
     def render(self):
         self.label.grid(row=0, column=0)
 
-        # API key feild stuff
-        self.apikeyentrylabel.place(x=300, y=100)
-        self.apikeyentry.place(x=190, y=125)
-        self.apikeysubmit.place(x=300, y=150)
+        self.troopselectorlabel.place(x=293, y=100)
+        self.troopselector.place(x=300, y=125)
+        self.troopquantityselectorlabel.place(x=300, y=160)
+        self.troopquantityselector.place(x=282, y=185)
+        self.recruitsubmit.place(x=300, y=210)
