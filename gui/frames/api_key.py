@@ -13,7 +13,7 @@ class APIKeyFrame(tkinter.Frame):
         self.apikeyentrylabel = labels.InputLabel(self, "Enter API Key:")
         self.apikeyentry = inputs.TextInput(self)
         self.apikeysubmit = buttons.SubmitButton(
-            self, text="Submit", width=10, hight=1, command=self.submit_api_key
+            self, text="Submit", width=10, height=1, command=self.submit_api_key
         )
 
     def submit_api_key(self):

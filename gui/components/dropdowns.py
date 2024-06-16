@@ -9,6 +9,7 @@ class Dropdown(tkinter.OptionMenu):
             self.selected_value.set(default)
         else:
             self.selected_value.set(options[0] if options else "")
+        self.selected_value.get()
 
         super().__init__(parent, self.selected_value, *options, *args, **kwargs)
 

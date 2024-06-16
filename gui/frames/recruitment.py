@@ -17,7 +17,7 @@ class RecruitmentFrame(tkinter.Frame):
                 "Infantry",
                 "Cavalry",
                 "Artillery",
-                "Assassin",
+                "Assassins",
                 "Bowmen",
                 "Big Bowmen",
                 "Heavy Men",
@@ -38,10 +38,13 @@ class RecruitmentFrame(tkinter.Frame):
 
         backend = API(apiKey)
         result = backend.recruit_troop(
-            self.troopselector.get_selection(), self.troopquantityselector.get(), "gold"
+            self.troopselector.get_selection().get(),
+            self.troopquantityselector.get(),
+            "gold",
         )
-        if result != 200:
-            self.show_error(self, result)
+
+        if result.status_code != 200:
+            self.show_error(result.json()["message"])
 
     def show_error(self, error: str):
         label = labels.PopUpLabel(
