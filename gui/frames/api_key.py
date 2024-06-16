@@ -15,7 +15,6 @@ class APIKeyFrame(tkinter.Frame):
         self.apikeysubmit = buttons.SubmitButton(
             self, text="Submit", width=10, hight=1, command=self.submit_api_key
         )
-        self.show_error("test")
 
     def submit_api_key(self):
         api_key = self.apikeyentry.get()
