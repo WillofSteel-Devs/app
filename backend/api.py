@@ -78,8 +78,6 @@ class API:
             "currency": currency.lower(),
         }  # will be moved to payload in the future - Neil
 
-        print(troop_type, amount, currency)  # temporary test code
-
         response = self.request(route, query_params=query_params)
         return response
 
