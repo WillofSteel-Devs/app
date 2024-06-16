@@ -17,7 +17,7 @@ class RecruitmentFrame(tkinter.Frame):
                 "Infantry",
                 "Cavalry",
                 "Artillery",
-                "Assassin",
+                "Assassins",
                 "Bowmen",
                 "Big Bowmen",
                 "Heavy Men",
@@ -42,6 +42,7 @@ class RecruitmentFrame(tkinter.Frame):
             self.troopquantityselector.get(),
             "gold",
         )
+        print(result.status_code)  # test code
         if result.status_code != 200:
             self.show_error(result.json()["message"])
 

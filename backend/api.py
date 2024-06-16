@@ -73,10 +73,13 @@ class API:
     def recruit_troop(self, troop_type: str, amount: str, currency: str = "gold"):
         route = Route("/recruit", "POST")
         query_params = {
-            "troop": troop_type.lower(),
+            "troop": troop_type.lower().replace(" ", "_").replace("'", ""),
             "amount": amount,
             "currency": currency.lower(),
         }  # will be moved to payload in the future - Neil
+
+        print(troop_type, amount, currency)  # temporary test code
+
         response = self.request(route, query_params=query_params)
         return response
 
