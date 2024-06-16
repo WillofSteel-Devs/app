@@ -73,7 +73,7 @@ class API:
     def recruit_troop(self, troop_type: str, amount: str, currency: str = "gold"):
         route = Route("/recruit", "POST")
         query_params = {
-            "troop_type": troop_type,
+            "troop": troop_type,
             "amount": amount,
             "currency": currency,
         }  # will be moved to payload in the future - Neil
