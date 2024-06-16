@@ -167,3 +167,5 @@ test.py
 # ruff cache
 .ruff-cache/
 .ruff*
+
+API_KEY.txt
