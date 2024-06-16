@@ -11,3 +11,6 @@ class Dropdown(tkinter.OptionMenu):
             self.selected_value.set(options[0] if options else "")
 
         super().__init__(parent, self.selected_value, *options, *args, **kwargs)
+
+    def get_selection(self):
+        return self.selected_value
