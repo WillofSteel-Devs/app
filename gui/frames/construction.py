@@ -34,16 +34,6 @@ class ConstructionFrame(tkinter.Frame):
 
         return backend.get_buildings()
 
-    def upgrade_buildings(self):
-        with open("API_KEY.txt", "r") as f:
-            apiKey = f.read()
-
-        backend = API(apiKey)
-
-        return (
-            "Not Implemented!"  # requires API support to know what to expect in return
-        )
-
     def render(self):
         self.label.grid(row=0, column=0)
 
