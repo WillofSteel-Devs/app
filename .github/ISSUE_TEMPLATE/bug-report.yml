@@ -34,7 +34,7 @@ body:
     attributes:
       label: App Version
       description: Version number of your Will of Steel App, available top right (latest is not a version)
-      placeholder: 0.1
+      placeholder: "0.1"
     validations:
       required: true
 
