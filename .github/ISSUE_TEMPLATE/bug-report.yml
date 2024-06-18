@@ -1,6 +1,8 @@
 name: Bug Report
 description: Something isn't working quite right in the software.
 labels: [type-bug, 'priority: 1 - normal']
+projects: [WillofSteel-Devs/2]
+assignees: [ItsNeil17]
 body:
   - type: markdown
     attributes:
