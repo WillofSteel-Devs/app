@@ -1,0 +1,63 @@
+name: Bug Report
+description: Something isn't working quite right in the software.
+labels: [type-bug, 'priority: 1 - normal']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Bug reports should only be used for reporting issues with how the software works. For assistance installing this software, please use our Discord Server.
+
+  - type: textarea
+    attributes:
+      label: Expected Results
+      description: Please describe what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Actual Results
+      description: Please provide a clear & concise description of the issue.
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: Steps to Reproduce
+      description: Please be as detailed as possible when providing steps to reproduce, failure to provide steps will result in this issue being closed.
+    validations:
+      required: true
+
+  - type: input
+    attributes:
+      label: App Version
+      description: Version number of your Will of Steel App, available top right (latest is not a version)
+      placeholder: 0.1
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error Logs
+      description: Any error logs if shown.
+      render: bash
+    validations:
+      required: false
+
+  - type: checkboxes
+    attributes:
+      label: Is there an existing issue for this?
+      description: Please [search here](https://github.com/WillofSteel-Devs/app/issues) to see if an issue already exists for your problem.
+      options:
+        - label: I have searched the existing issues before opening this issue.
+          required: true
+        - label: I have provided all relevant details regarding this issue.
+          required: true
+        - label: I have removed my API Key from display, if visible.
+          required: true
+
+  - type: textarea
+    attributes:
+      label: Additional Context
+      description: If there is anything else to say, please do so here.

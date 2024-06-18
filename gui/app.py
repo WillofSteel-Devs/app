@@ -25,6 +25,7 @@ class App(tkinter.Tk):
         self.recruitment_frame = RecruitmentFrame(self)
         self.construction_frame = ConstructionFrame(self)
         self.settings_frame = SettingsFrame(self)
+        self.api_key_frame = APIKeyFrame(self)
 
         self.api_key = self.verify_api()
         if not self.api_key:
