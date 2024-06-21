@@ -52,9 +52,20 @@ class API:
         return player
 
     def get_alliance(self) -> Alliance | None:
-        route = Route("/alliance", "GET")
-        response = self.request(route)
-        data = response.json()
+        # route = Route("/alliance", "GET")      API BROKEN
+        # response = self.request(route)
+        # data = response.json()
+
+        # TEMPORARY CODE START
+        data = {
+            "owner": 796483244052447242,
+            "created_at": "2019-08-24T14:15:22",
+            "name": "remeber this is placeholder info",
+            "user_limit": 10,
+            "bank": 100000000,
+        }
+        # TEMPORARY CODE END
+
         alliance = Alliance.from_data(data)
         return alliance
 

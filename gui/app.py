@@ -7,6 +7,7 @@ from gui.frames.lookup import LookupFrame
 from gui.frames.npc import NpcFrame
 from gui.frames.recruitment import RecruitmentFrame
 from gui.frames.construction import ConstructionFrame
+from gui.frames.alliance import AllianceFrame
 from gui.frames.settings import SettingsFrame
 from gui.frames.api_key import APIKeyFrame
 
@@ -24,6 +25,7 @@ class App(tkinter.Tk):
         self.npc_frame = NpcFrame(self)
         self.recruitment_frame = RecruitmentFrame(self)
         self.construction_frame = ConstructionFrame(self)
+        self.alliance_frame = AllianceFrame(self)
         self.settings_frame = SettingsFrame(self)
         self.api_key_frame = APIKeyFrame(self)
 
