@@ -19,15 +19,8 @@ class App(tkinter.Tk):
         self.geometry("800x600")
         self.resizable(False, False)
 
+        # init sidebar
         self.sidebar = Sidebar(self)
-        self.attack_frame = AttackFrame(self)
-        self.lookup_frame = LookupFrame(self)
-        self.npc_frame = NpcFrame(self)
-        self.recruitment_frame = RecruitmentFrame(self)
-        self.construction_frame = ConstructionFrame(self)
-        self.alliance_frame = AllianceFrame(self)
-        self.settings_frame = SettingsFrame(self)
-        self.api_key_frame = APIKeyFrame(self)
 
         self.api_key = self.verify_api()
         if not self.api_key:
@@ -37,14 +30,24 @@ class App(tkinter.Tk):
             self.current_frame.render()
         else:
             self.sidebar.place(x=0, y=0, height=600, width=150)
-            self.current_frame = self.lookup_frame
+            self.current_frame = LookupFrame(self)
             self.build_main_frame()
+
+        # init frames
+        self.attack_frame = AttackFrame(self)
+        self.lookup_frame = LookupFrame(self)
+        self.npc_frame = NpcFrame(self)
+        self.recruitment_frame = RecruitmentFrame(self)
+        self.construction_frame = ConstructionFrame(self)
+        self.alliance_frame = AllianceFrame(self)
+        self.settings_frame = SettingsFrame(self)
+        self.api_key_frame = APIKeyFrame(self)
 
     def build_main_frame(self):
         if self.current_frame:
             self.current_frame.place_forget()
         self.sidebar.place(x=0, y=0, height=600, width=150)
-        self.current_frame = self.lookup_frame
+        self.current_frame = LookupFrame(self)
         self.current_frame.place(x=150, y=0, height=600, width=650)
         self.current_frame.render()
 

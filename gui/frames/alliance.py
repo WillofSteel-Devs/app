@@ -1,6 +1,8 @@
+# pyright: reportOptionalMemberAccess=false
+# TODO for neil fix later
+
 import tkinter
 from ..components import labels, inputs, buttons
-from backend.api import API
 
 
 class AllianceFrame(tkinter.Frame):
@@ -8,7 +10,7 @@ class AllianceFrame(tkinter.Frame):
         super().__init__(parent, width=650, height=600, bg="orange")
         self.parent = parent
 
-        self.allianceData = self.get_alliance_data()
+        self.allianceData = self.parent.backend.get_alliance()
 
         self.label = labels.FrameLabel(self, text="Alliance")
 
@@ -50,31 +52,17 @@ class AllianceFrame(tkinter.Frame):
             command=self.update_alliance_user_limit,
         )
 
-    def get_alliance_data(self):
-        with open("API_KEY.txt", "r") as f:
-            apiKey = f.read()
-
-        backend = API(apiKey)
-
-        return backend.get_alliance()
-
     def update_alliance_name(self):
         name = self.allianceNameUpdateField.get()
-        with open("API_KEY.txt", "r") as f:
-            apiKey = f.read()
 
-        backend = API(apiKey)
-        backend.update_alliance_name(name)
+        self.parent.backend.update_alliance_name(name)
 
         self.parent.change_frame(self)  # reload frame
 
     def update_alliance_user_limit(self):
         user_limit = self.allianceUserLimitUpdateField.get()
-        with open("API_KEY.txt", "r") as f:
-            apiKey = f.read()
 
-        backend = API(apiKey)
-        backend.update_alliance_user_limit(user_limit)
+        self.parent.backend.update_alliance_user_limit(int(user_limit))
 
         self.parent.change_frame(self)  # reload frame
 
