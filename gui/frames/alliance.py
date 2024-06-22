@@ -57,14 +57,18 @@ class AllianceFrame(tkinter.Frame):
 
         self.parent.backend.update_alliance_name(name)
 
-        self.parent.change_frame(self)  # reload frame
+        self.parent.change_frame(
+            AllianceFrame(self.parent)
+        )  # TODO instead of initialising a new frame, update the current frame
 
     def update_alliance_user_limit(self):
         user_limit = self.allianceUserLimitUpdateField.get()
 
         self.parent.backend.update_alliance_user_limit(int(user_limit))
 
-        self.parent.change_frame(self)  # reload frame
+        self.parent.change_frame(
+            AllianceFrame(self.parent)
+        )  # TODO instead of initialising a new frame, update the current frame
 
     def render(self):
         self.label.grid(row=0, column=0)
