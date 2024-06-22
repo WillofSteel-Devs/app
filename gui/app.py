@@ -7,8 +7,10 @@ from gui.frames.lookup import LookupFrame
 from gui.frames.npc import NpcFrame
 from gui.frames.recruitment import RecruitmentFrame
 from gui.frames.construction import ConstructionFrame
+from gui.frames.alliance import AllianceFrame
 from gui.frames.settings import SettingsFrame
 from gui.frames.api_key import APIKeyFrame
+from gui.frames.empty_frame import EmptyFrame
 
 
 class App(tkinter.Tk):
@@ -18,14 +20,6 @@ class App(tkinter.Tk):
         self.geometry("800x600")
         self.resizable(False, False)
 
-        self.sidebar = Sidebar(self)
-        self.attack_frame = AttackFrame(self)
-        self.lookup_frame = LookupFrame(self)
-        self.npc_frame = NpcFrame(self)
-        self.recruitment_frame = RecruitmentFrame(self)
-        self.construction_frame = ConstructionFrame(self)
-        self.settings_frame = SettingsFrame(self)
-
         self.api_key = self.verify_api()
         if not self.api_key:
             self.api_key_frame = APIKeyFrame(self)
@@ -33,15 +27,22 @@ class App(tkinter.Tk):
             self.current_frame.place(x=0, y=0, height=600, width=800)
             self.current_frame.render()
         else:
-            self.sidebar.place(x=0, y=0, height=600, width=150)
-            self.current_frame = self.lookup_frame
-            self.build_main_frame()
+            self.build_app()
 
-    def build_main_frame(self):
-        if self.current_frame:
+    def build_app(self, destroy: bool = False) -> None:
+        if destroy:
             self.current_frame.place_forget()
+        self.sidebar = Sidebar(self)
+        self.attack_frame = AttackFrame(self)
+        self.lookup_frame = LookupFrame(self)
+        self.npc_frame = NpcFrame(self)
+        self.recruitment_frame = RecruitmentFrame(self)
+        self.construction_frame = ConstructionFrame(self)
+        self.alliance_frame = AllianceFrame(self)
+        self.settings_frame = SettingsFrame(self)
+        self.api_key_frame = APIKeyFrame(self)
         self.sidebar.place(x=0, y=0, height=600, width=150)
-        self.current_frame = self.lookup_frame
+        self.current_frame = EmptyFrame(self)
         self.current_frame.place(x=150, y=0, height=600, width=650)
         self.current_frame.render()
 

@@ -36,6 +36,13 @@ class Sidebar(tkinter.Frame):
         )
         self.recruitment_button.pack()
 
+        self.alliance_button = buttons.Sidebarbutton(
+            self,
+            text="Alliance",
+            command=lambda: self.switch_frame(self.parent.alliance_frame),
+        )
+        self.alliance_button.pack()
+
         self.lookup_button = buttons.Sidebarbutton(
             self,
             text="Lookup",
