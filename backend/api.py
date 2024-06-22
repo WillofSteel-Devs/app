@@ -87,7 +87,7 @@ class API:
         response = self.request(route)
         orders = [MarketOrder.from_data(order) for order in response.json()]
         return orders
-    
+
     def get_outposts(self):
         route = Route("/outpost/list", "GET")
         response = self.request(route)
