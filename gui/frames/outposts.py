@@ -1,5 +1,5 @@
 import tkinter
-from ..components import labels, inputs, buttons
+from ..components import labels
 
 
 class OutpostsFrame(tkinter.Frame):
