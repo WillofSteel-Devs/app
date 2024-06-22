@@ -20,8 +20,8 @@ class FrameLabel(tkinter.Label):
 
 
 class InputLabel(tkinter.Label):
-    def __init__(self, parent, text):
-        super().__init__(parent, text=text, bg="#ffffff")
+    def __init__(self, parent, text, bg="#ffffff"):
+        super().__init__(parent, text=text, bg=bg)
 
 
 class PopUpLabel(tkinter.Label):

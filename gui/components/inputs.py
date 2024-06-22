@@ -18,7 +18,7 @@ class IntergerOnlyEntry(tkinter.Entry):
 
         self.var = tkinter.StringVar()
 
-        super().__init__(parent, textvariable=self.var, *args, **kwargs)
+        super().__init__(parent, width=50, textvariable=self.var, *args, **kwargs)
 
         self.validate_command = (self.register(self.validate_input), "%P")
 
