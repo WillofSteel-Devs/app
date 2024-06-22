@@ -10,6 +10,7 @@ from gui.frames.construction import ConstructionFrame
 from gui.frames.alliance import AllianceFrame
 from gui.frames.settings import SettingsFrame
 from gui.frames.api_key import APIKeyFrame
+from gui.frames.empty_frame import EmptyFrame
 
 
 class App(tkinter.Tk):
@@ -40,8 +41,9 @@ class App(tkinter.Tk):
         self.alliance_frame = AllianceFrame(self)
         self.settings_frame = SettingsFrame(self)
         self.api_key_frame = APIKeyFrame(self)
+        self.empty_frame = EmptyFrame(self)
         self.sidebar.place(x=0, y=0, height=600, width=150)
-        self.current_frame = self.lookup_frame
+        self.current_frame = self.empty_frame
         self.current_frame.place(x=150, y=0, height=600, width=650)
         self.current_frame.render()
 
