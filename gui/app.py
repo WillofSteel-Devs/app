@@ -41,9 +41,8 @@ class App(tkinter.Tk):
         self.alliance_frame = AllianceFrame(self)
         self.settings_frame = SettingsFrame(self)
         self.api_key_frame = APIKeyFrame(self)
-        self.empty_frame = EmptyFrame(self)
         self.sidebar.place(x=0, y=0, height=600, width=150)
-        self.current_frame = self.empty_frame
+        self.current_frame = EmptyFrame(self)
         self.current_frame.place(x=150, y=0, height=600, width=650)
         self.current_frame.render()
 
