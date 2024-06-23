@@ -87,3 +87,19 @@ class API:
         response = self.request(route)
         orders = [MarketOrder.from_data(order) for order in response.json()]
         return orders
+
+    def get_buildings(self):
+        route = Route("/buildings", "GET")
+        response = self.request(route)
+        return response.json()
+
+    def upgrade_building(self, building_type: str, levels_to_upgrade: str):
+        route = Route("/buildings", "POST")
+
+        query_params = {
+            "building": building_type.lower(),
+            "level": levels_to_upgrade,
+        }
+
+        response = self.request(route, query_params=query_params)
+        return response.json()
