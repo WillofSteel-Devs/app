@@ -7,7 +7,8 @@ from ..components import labels, inputs, buttons
 
 class AllianceFrame(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent, width=650, height=600, bg="orange")
+        self.bg = "orange"
+        super().__init__(parent, width=650, height=600, bg=self.bg)
         self.parent = parent
 
         self.allianceData = self.parent.backend.get_alliance()
