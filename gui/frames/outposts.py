@@ -23,7 +23,9 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=lambda: self.capture_outpost(1), #note: lambda funcs used to allow passing the number variable
+            command=lambda: self.capture_outpost(
+                1
+            ),  # note: lambda funcs used to allow passing the number variable
         )
 
         self.outpost2Container = containers.SubContainer(
@@ -241,11 +243,15 @@ class OutpostsFrame(tkinter.Frame):
         return response["outposts"]
 
     def capture_outpost(self, number):
-        self.popup = popups.ConfirmPopup(self, bg="lightblue", confirmLabelText="Confirm Capture?")
+        self.popup = popups.ConfirmPopup(
+            self, bg="lightblue", confirmLabelText="Confirm Capture?"
+        )
 
         self.wait_window(self.popup)
         if self.popup.result == "confirmed":
-            print(f"Capture of Outpost {number} Confirmed") # TODO implement capture (requires API support)
+            print(
+                f"Capture of Outpost {number} Confirmed"
+            )  # TODO implement capture (requires API support)
 
     def render(self):
         self.label.grid(row=0, column=0)
