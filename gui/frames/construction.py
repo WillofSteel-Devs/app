@@ -16,29 +16,38 @@ class ConstructionFrame(tkinter.Frame):
             self, f'Farmhouse Level: {self.buildingLevels["farmhouse_level"]}'
         )
         self.farmhouseUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1, command=self.upgrade_building("farmhouse")
+            self, text="Upgrade", height=1, command=self.farmhouse_upgrade
         )
 
         self.bakeryUpgradeLabel = labels.InputLabel(
             self, f'Bakery Level: {self.buildingLevels["bakery_level"]}'
         )
         self.bakeryUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1, command=self.upgrade_building("bakery")
+            self, text="Upgrade", height=1, command=self.bakery_upgrade
         )
 
         self.storehouseUpgradeLabel = labels.InputLabel(
             self, f'Storehouse Level: {self.buildingLevels["storehouse_level"]}'
         )
         self.storehouseUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1, command=self.upgrade_building("storehouse")
+            self, text="Upgrade", height=1, command=self.storehouse_upgrade
         )
 
         self.productionAmount = labels.InputLabel(
             self, f'Food Production: {self.buildingLevels["production"]}'
         )
 
-    def upgrade_building(self, buildingtype):
-        self.parent.backend.upgrade_building(buildingtype)
+    def farmhouse_upgrade(self) -> None:
+        self.upgrade_building("farmhouse")
+
+    def bakery_upgrade(self) -> None:
+        self.upgrade_building("bakery")
+
+    def storehouse_upgrade(self) -> None:
+        self.upgrade_building("storehouse")
+
+    def upgrade_building(self, building_type: str) -> None:
+        self.parent.backend.upgrade_building(building_type)
 
         self.parent.change_frame(
             ConstructionFrame(self.parent)
