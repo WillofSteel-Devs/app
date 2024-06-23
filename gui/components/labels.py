@@ -20,7 +20,9 @@ class FrameLabel(tkinter.Label):
 
 
 class InputLabel(tkinter.Label):
-    def __init__(self, parent, text, bg="#ffffff"):
+    def __init__(self, parent, text, bg=None):
+        if bg is None:
+            bg = parent.bg
         super().__init__(parent, text=text, bg=bg)
 
 
