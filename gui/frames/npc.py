@@ -4,7 +4,8 @@ from ..components import labels
 
 class NpcFrame(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent, bg="blue")
+        self.bg = "blue"
+        super().__init__(parent, bg=self.bg)
         self.parent = parent
 
         self.label = labels.FrameLabel(self, "NPC")

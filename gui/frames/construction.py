@@ -4,7 +4,8 @@ from ..components import labels, buttons
 
 class ConstructionFrame(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent, bg="purple")
+        self.bg = "purple"
+        super().__init__(parent, bg=self.bg)
         self.parent = parent
 
         self.label = labels.FrameLabel(self, "Construction")

@@ -4,7 +4,8 @@ from ..components.labels import FrameLabel
 
 class LookupFrame(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent, width=650, height=600, bg="red")
+        self.bg = "red"
+        super().__init__(parent, width=650, height=600, bg=self.bg)
         self.parent = parent
 
         self.label = FrameLabel(self, text="Lookup")
