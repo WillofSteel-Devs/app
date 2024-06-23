@@ -17,5 +17,7 @@ class FrameButton(tkinter.Button):
 
 
 class SubmitButton(tkinter.Button):
-    def __init__(self, parent, text="", command=None, width=10, height=5):
-        super().__init__(parent, text=text, command=command, width=width, height=height)
+    def __init__(self, parent, text="", command=None, width=10, height=5, bg=None):
+        if bg is None:
+            bg = parent.bg
+        super().__init__(parent, text=text, command=command, width=width, height=height, bg=bg)
