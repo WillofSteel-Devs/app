@@ -16,24 +16,33 @@ class ConstructionFrame(tkinter.Frame):
             self, f'Farmhouse Level: {self.buildingLevels["farmhouse_level"]}'
         )
         self.farmhouseUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1
+            self, text="Upgrade", height=1, command=self.upgrade_building("farmhouse")
         )
 
         self.bakeryUpgradeLabel = labels.InputLabel(
             self, f'Bakery Level: {self.buildingLevels["bakery_level"]}'
         )
-        self.bakeryUpgradeButton = buttons.SubmitButton(self, text="Upgrade", height=1)
+        self.bakeryUpgradeButton = buttons.SubmitButton(
+            self, text="Upgrade", height=1, command=self.upgrade_building("bakery")
+        )
 
         self.storehouseUpgradeLabel = labels.InputLabel(
             self, f'Storehouse Level: {self.buildingLevels["storehouse_level"]}'
         )
         self.storehouseUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1
+            self, text="Upgrade", height=1, command=self.upgrade_building("storehouse")
         )
 
         self.productionAmount = labels.InputLabel(
             self, f'Food Production: {self.buildingLevels["production"]}'
         )
+
+    def upgrade_building(self, buildingtype):
+        self.parent.backend.upgrade_building(buildingtype)
+
+        self.parent.change_frame(
+            ConstructionFrame(self.parent)
+        )  # TODO instead of initialising a new frame, update the current frame
 
     def render(self):
         self.label.grid(row=0, column=0)

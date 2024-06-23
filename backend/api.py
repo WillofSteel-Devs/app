@@ -91,7 +91,7 @@ class API:
     def get_buildings(self):
         route = Route("/buildings", "GET")
         response = self.request(route)
-        return response
+        return response.json()
 
     def upgrade_building(self, building_type: str, levels_to_upgrade: str):
         route = Route("/buildings", "POST")
@@ -102,4 +102,4 @@ class API:
         }
 
         response = self.request(route, query_params=query_params)
-        return response
+        return response.json()
