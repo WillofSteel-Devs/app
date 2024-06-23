@@ -1,5 +1,5 @@
 import tkinter
-from ..components import labels, containers, buttons
+from ..components import labels, containers, buttons, popups
 
 
 class OutpostsFrame(tkinter.Frame):
@@ -23,7 +23,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(1),
+            command=lambda: self.capture_outpost(1), #note: lambda funcs used to allow passing the number variable
         )
 
         self.outpost2Container = containers.SubContainer(
@@ -38,7 +38,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(2),
+            command=lambda: self.capture_outpost(2),
         )
 
         self.outpost3Container = containers.SubContainer(
@@ -53,7 +53,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(3),
+            command=lambda: self.capture_outpost(3),
         )
 
         self.outpost4Container = containers.SubContainer(
@@ -68,7 +68,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(4),
+            command=lambda: self.capture_outpost(4),
         )
 
         self.outpost5Container = containers.SubContainer(
@@ -83,7 +83,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(5),
+            command=lambda: self.capture_outpost(5),
         )
 
         self.outpost6Container = containers.SubContainer(
@@ -98,7 +98,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(6),
+            command=lambda: self.capture_outpost(6),
         )
 
         self.outpost7Container = containers.SubContainer(
@@ -113,7 +113,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(7),
+            command=lambda: self.capture_outpost(7),
         )
 
         self.outpost8Container = containers.SubContainer(
@@ -128,7 +128,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(8),
+            command=lambda: self.capture_outpost(8),
         )
 
         self.outpost9Container = containers.SubContainer(
@@ -143,7 +143,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(9),
+            command=lambda: self.capture_outpost(9),
         )
 
         self.outpost10Container = containers.SubContainer(
@@ -158,7 +158,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(10),
+            command=lambda: self.capture_outpost(10),
         )
 
         self.outpost11Container = containers.SubContainer(
@@ -173,7 +173,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(11),
+            command=lambda: self.capture_outpost(11),
         )
 
         self.outpost12Container = containers.SubContainer(
@@ -188,7 +188,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(12),
+            command=lambda: self.capture_outpost(12),
         )
 
         self.outpost13Container = containers.SubContainer(
@@ -203,7 +203,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(13),
+            command=lambda: self.capture_outpost(13),
         )
 
         self.outpost14Container = containers.SubContainer(
@@ -218,7 +218,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(14),
+            command=lambda: self.capture_outpost(14),
         )
 
         self.outpost15Container = containers.SubContainer(
@@ -233,7 +233,7 @@ class OutpostsFrame(tkinter.Frame):
             width=10,
             height=1,
             bg="light grey",
-            command=self.capture_outpost(15),
+            command=lambda: self.capture_outpost(15),
         )
 
     def get_outposts(self):
@@ -241,8 +241,11 @@ class OutpostsFrame(tkinter.Frame):
         return response["outposts"]
 
     def capture_outpost(self, number):
-        # TODO implement capture (requires API support)
-        pass
+        self.popup = popups.ConfirmPopup(self, bg="lightblue", confirmLabelText="Confirm Capture?")
+
+        self.wait_window(self.popup)
+        if self.popup.result == "confirmed":
+            print(f"Capture of Outpost {number} Confirmed") # TODO implement capture (requires API support)
 
     def render(self):
         self.label.grid(row=0, column=0)
