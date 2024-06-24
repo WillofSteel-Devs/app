@@ -50,6 +50,13 @@ class Sidebar(tkinter.Frame):
         )
         self.lookup_button.pack()
 
+        self.outposts_button = buttons.Sidebarbutton(
+            self,
+            text="Outposts",
+            command=lambda: self.switch_frame(self.parent.outposts_frame),
+        )
+        self.outposts_button.pack()
+
         self.apiKey_button = buttons.Sidebarbutton(
             self,
             text="API Key",

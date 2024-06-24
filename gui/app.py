@@ -11,6 +11,7 @@ from gui.frames.alliance import AllianceFrame
 from gui.frames.settings import SettingsFrame
 from gui.frames.api_key import APIKeyFrame
 from gui.frames.empty_frame import EmptyFrame
+from gui.frames.outposts import OutpostsFrame
 
 
 class App(tkinter.Tk):
@@ -41,6 +42,7 @@ class App(tkinter.Tk):
         self.alliance_frame = AllianceFrame(self)
         self.settings_frame = SettingsFrame(self)
         self.api_key_frame = APIKeyFrame(self)
+        self.outposts_frame = OutpostsFrame(self)
         self.sidebar.place(x=0, y=0, height=600, width=150)
         self.current_frame = EmptyFrame(self)
         self.current_frame.place(x=150, y=0, height=600, width=650)
