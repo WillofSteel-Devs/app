@@ -1,6 +1,5 @@
 import tkinter
-from ..components import labels, containers, dropdowns, popups, inputs
-from models import MarketOrder
+from ..components import labels, dropdowns, inputs
 
 class MarketFrame(tkinter.Frame):
     def __init__(self, parent, bg="gray"):

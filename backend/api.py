@@ -82,7 +82,7 @@ class API:
         response = self.request(route, query_params=query_params)
         return response
 
-    def get_market_orders(self, item: str, order_type: str) -> list[MarketOrder]:
+    def get_market_orders(self, item: str, order_type: str) -> list[MarketOrder | None]:
         route = Route("/market", "GET")
         query_params = {
             "item_type": item,
