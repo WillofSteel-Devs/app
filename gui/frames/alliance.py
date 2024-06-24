@@ -53,23 +53,27 @@ class AllianceFrame(tkinter.Frame):
             command=self.update_alliance_user_limit,
         )
 
+    def update_data(self):
+        self.allianceData = self.parent.backend.get_alliance()
+        self.allianceNameLabel.config(text=f"Alliance: {self.allianceData.name}")
+        self.allianceOwnerLabel.config(text=f"Owner (Discord ID): {self.allianceData.owner}")
+        self.allianceUserLimitLabel.config(text=f'User Limit: {"{:,}".format(self.allianceData.user_limit)}')
+        self.allianceBankBalanceLabel.config(text=f'Bank Balance: {"{:,}".format(self.allianceData.bank)}')
+        self.allianceCreationTimestamp.config(text=f"Alliance Creation Timestamp: {self.allianceData.created_at}")
+
     def update_alliance_name(self):
         name = self.allianceNameUpdateField.get()
 
         self.parent.backend.update_alliance_name(name)
 
-        self.parent.change_frame(
-            AllianceFrame(self.parent)
-        )  # TODO instead of initialising a new frame, update the current frame
+        self.update_data()
 
     def update_alliance_user_limit(self):
         user_limit = self.allianceUserLimitUpdateField.get()
 
         self.parent.backend.update_alliance_user_limit(int(user_limit))
 
-        self.parent.change_frame(
-            AllianceFrame(self.parent)
-        )  # TODO instead of initialising a new frame, update the current frame
+        self.update_data()
 
     def render(self):
         self.label.grid(row=0, column=0)
