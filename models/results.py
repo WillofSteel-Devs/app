@@ -4,7 +4,7 @@ from typing import NamedTuple
 class NPCResult(NamedTuple):
     won: bool
     attacker_lost_troops: dict[UnitType, int]
-    npc_lost_troops: dict[UnitType]
+    npc_lost_troops: dict[UnitType, int]
     gold_loot: int
     ruby_loot: int
     food_loot: int

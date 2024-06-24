@@ -110,7 +110,7 @@ class API:
         response = self.request(route, query_params=query_params)
         return response.json()
 
-    def attack_npc(self, troops: dict[UnitType, int]) -> NPCResult:
+    def attack_npc(self, troops: dict[UnitType, int]) -> NPCResult | None:
         route = Route("/npc", "POST")
         json = {"troops": troops}
         print(json)

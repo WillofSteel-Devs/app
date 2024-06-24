@@ -41,7 +41,7 @@ class Player(NamedTuple):
 
         return Player(
             id=data["user_id"],
-            registered_at=_parse_date(data["registered_at"]),
+            registered_at=_parse_date(data["registered_at"]), # type: ignore
             gold=data["gold"],
             ruby=data["ruby"],
             units={
