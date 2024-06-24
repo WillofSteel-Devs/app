@@ -15,12 +15,12 @@ class Sidebar(tkinter.Frame):
         )
         self.npc_button.pack()
 
-        self.attack_button = buttons.Sidebarbutton(
-            self,
-            text="Attack",
-            command=lambda: self.switch_frame(self.parent.attack_frame),
-        )
-        self.attack_button.pack()
+        # self.attack_button = buttons.Sidebarbutton(
+        #     self,
+        #     text="Attack",
+        #     command=lambda: self.switch_frame(self.parent.attack_frame),
+        # )
+        # self.attack_button.pack()
 
         self.construction_button = buttons.Sidebarbutton(
             self,
@@ -43,12 +43,12 @@ class Sidebar(tkinter.Frame):
         )
         self.alliance_button.pack()
 
-        self.lookup_button = buttons.Sidebarbutton(
-            self,
-            text="Lookup",
-            command=lambda: self.switch_frame(self.parent.lookup_frame),
-        )
-        self.lookup_button.pack()
+        # self.lookup_button = buttons.Sidebarbutton(
+        #     self,
+        #     text="Lookup",
+        #     command=lambda: self.switch_frame(self.parent.lookup_frame),
+        # )
+        # self.lookup_button.pack()
 
         self.outposts_button = buttons.Sidebarbutton(
             self,

@@ -13,7 +13,6 @@ class MarketOrder(NamedTuple):
     def from_data(data: dict | None):
         if data is None:
             return None
-        print(data)
         return MarketOrder(
             item_id=data["item_type"],
             order_type=data["order_type"],
