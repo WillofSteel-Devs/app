@@ -3,8 +3,7 @@ from ..components import labels, buttons
 
 
 class ConstructionFrame(tkinter.Frame):
-    def __init__(self, parent, inputResponse=''):
-        self.upgradeResponse = inputResponse
+    def __init__(self, parent):
         self.bg = "purple"
         super().__init__(parent, bg=self.bg)
         self.parent = parent
@@ -39,27 +38,27 @@ class ConstructionFrame(tkinter.Frame):
             self, f'Food Production: {self.buildingLevels["production"]}'
         )
 
-        self.feedbackLabel = labels.InputLabel(
-            self, self.upgradeResponse
-        )
-
     def farmhouse_upgrade(self) -> None:
-        self.upgradeResponse = ''
         self.upgrade_building("farmhouse")
 
     def bakery_upgrade(self) -> None:
-        self.upgradeResponse = ''
         self.upgrade_building("bakery")
 
     def storehouse_upgrade(self) -> None:
-        self.upgradeResponse = ''
         self.upgrade_building("storehouse")
+
+    def show_feedback(self, feedback: str) -> None:
+        self.feedbackLabel = labels.InputLabel(
+            self, feedback
+        )
+        self.feedbackLabel.place(x=300, y=350)
+
 
     def upgrade_building(self, building_type: str) -> None:
         self.upgradeResponse = self.parent.backend.upgrade_building(building_type, '1')
 
         self.parent.change_frame(
-            ConstructionFrame(self.parent, self.upgradeResponse)
+            ConstructionFrame(self.parent)
         )  # TODO instead of initialising a new frame, update the current frame
 
     def render(self):
@@ -77,5 +76,3 @@ class ConstructionFrame(tkinter.Frame):
         self.storehouseUpgradeButton.place(x=443, y=225)
 
         self.productionAmount.place(x=300, y=275)
-
-        self.feedbackLabel.place(x=300, y=350)
