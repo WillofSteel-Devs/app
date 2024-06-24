@@ -57,9 +57,9 @@ class ConstructionFrame(tkinter.Frame):
     def upgrade_building(self, building_type: str) -> None:
         self.upgradeResponse = self.parent.backend.upgrade_building(building_type, '1')
 
-        self.parent.change_frame(
-            ConstructionFrame(self.parent)
-        )  # TODO instead of initialising a new frame, update the current frame
+        frame = ConstructionFrame(self.parent)
+        self.parent.change_frame(frame)  # TODO instead of initialising a new frame, update the current frame
+        frame.show_feedback(self.upgradeResponse["detail"])
 
     def render(self):
         self.label.grid(row=0, column=0)
