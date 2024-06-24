@@ -6,7 +6,7 @@ from backend.api import API
 
 def resource_path(asset_path: str) -> str:
     try:
-        base_path = sys._MEIPASS2
+        base_path = sys._MEIPASS2 # type: ignore
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, asset_path)
@@ -19,7 +19,7 @@ class APIKeyFrame(tkinter.Frame):
 
         self.label = labels.FrameLabel(self, "API Key")
 
-        self.apikeyentrylabel = labels.InputLabel(self, f"Enter API Key:")
+        self.apikeyentrylabel = labels.InputLabel(self, "Enter API Key:")
         self.apikeyentry = inputs.TextInput(self)
         self.apikeysubmit = buttons.SubmitButton(
             self, text="Submit", width=10, height=1, command=self.submit_api_key

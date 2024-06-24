@@ -18,7 +18,7 @@ from gui.frames.market import MarketFrame
 
 def resource_path(asset_path: str) -> str:
     try:
-        base_path = sys._MEIPASS2
+        base_path = sys._MEIPASS2 # type: ignore
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, asset_path)
