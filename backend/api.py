@@ -82,10 +82,15 @@ class API:
         response = self.request(route, query_params=query_params)
         return response
 
-    def get_market_orders(self):
+    def get_market_orders(self, item: str, order_type: str) -> list[MarketOrder]:
         route = Route("/market", "GET")
-        response = self.request(route)
-        orders = [MarketOrder.from_data(order) for order in response.json()]
+        query_params = {
+            "item_type": item,
+            "order_type": order_type
+        }
+        response = self.request(route, query_params=query_params)
+        orders = response.json()["orders"]
+        orders = [MarketOrder.from_data(order) for order in orders.values()]
         return orders
 
     def get_outposts(self):

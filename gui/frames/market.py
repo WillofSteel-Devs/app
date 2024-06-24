@@ -1,6 +1,6 @@
 import tkinter
 from ..components import labels, containers, dropdowns, popups, inputs
-from models import order
+from models import MarketOrder
 
 class MarketFrame(tkinter.Frame):
     def __init__(self, parent, bg="gray"):
@@ -9,7 +9,7 @@ class MarketFrame(tkinter.Frame):
         self.bg = bg
 
         self.item_selector = dropdowns.Dropdown(
-            self, ["Placeholder One", "Placeholder Two", "Placeholder Three"]
+            self, ["IRON_FRAME", "Placeholder Two", "Placeholder Three"]
         )
         self.item_selector_label = labels.InputLabel(self, "Item", bg="white")
 
@@ -19,7 +19,7 @@ class MarketFrame(tkinter.Frame):
         self.sell_offers = tkinter.Listbox(self, bg=self.bg)
         self.sell_offers_label = labels.InputLabel(self, "Sell Offers", bg="white")
 
-        self.refresh_button = tkinter.Button(self, bg="green", text="Refresh", command=self.get_all_offers)
+        self.refresh_button = tkinter.Button(self, bg="green", text="Refresh", command=self.update_offers)
 
         self.amount = inputs.IntergerOnlyEntry(self, 0, 100)
         self.amount_label = labels.InputLabel(self, "Amount", bg=self.bg)
@@ -34,7 +34,7 @@ class MarketFrame(tkinter.Frame):
 
         self.create_offer_button = tkinter.Button(self, bg="green", text="Create Offer")
 
-
+        self.update_offers()
 
     def render(self):
         self.item_selector.place(x=100, y=50)
@@ -60,9 +60,15 @@ class MarketFrame(tkinter.Frame):
 
         self.create_offer_button.place(x=500, y=420)
 
-        self.get_all_offers()
+    def update_offers(self) -> None:
+        item = self.item_selector.get_selection().get()
+        buy_orders = self.parent.backend.get_market_orders(item, "buy")
+        sell_orders = self.parent.backend.get_market_orders(item, "sell")
+        
+        self.buy_offers.delete(0, "end")
+        self.sell_offers.delete(0, "end")
+        for order in buy_orders:
+            self.buy_offers.insert("end", f"{order.price} - {order.amount}")
 
-    def get_all_offers(self, item_type = None) -> list[dict]: #TODO make this use actual data from the api
-        ...
-        # orders = self.parent.backend.get_market_orders()
-        # return orders
+        for order in sell_orders:
+            self.sell_offers.insert("end", f"{order.price} - {order.amount}")
