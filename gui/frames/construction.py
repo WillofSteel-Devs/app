@@ -46,7 +46,6 @@ class ConstructionFrame(tkinter.Frame):
 
     def update_data(self):
         self.buildingLevels = self.parent.backend.get_buildings()
-        self.displayBuildingLevels.config(text='Buildings:')
         self.farmhouseUpgradeLabel.config(text=f'Farmhouse Level: {self.buildingLevels["farmhouse_level"]}')
         self.bakeryUpgradeLabel.config(text=f'Bakery Level: {self.buildingLevels["bakery_level"]}')
         self.storehouseUpgradeLabel.config(text=f'Storehouse Level: {self.buildingLevels["storehouse_level"]}')
