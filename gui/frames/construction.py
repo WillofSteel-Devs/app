@@ -17,21 +17,30 @@ class ConstructionFrame(tkinter.Frame):
             self, f'Farmhouse Level: {self.buildingLevels["farmhouse_level"]}'
         )
         self.farmhouseUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1, command=lambda: self.upgrade_building("farmhouse")
+            self,
+            text="Upgrade",
+            height=1,
+            command=lambda: self.upgrade_building("farmhouse"),
         )
 
         self.bakeryUpgradeLabel = labels.InputLabel(
             self, f'Bakery Level: {self.buildingLevels["bakery_level"]}'
         )
         self.bakeryUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1, command=lambda: self.upgrade_building("bakery")
+            self,
+            text="Upgrade",
+            height=1,
+            command=lambda: self.upgrade_building("bakery"),
         )
 
         self.storehouseUpgradeLabel = labels.InputLabel(
             self, f'Storehouse Level: {self.buildingLevels["storehouse_level"]}'
         )
         self.storehouseUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1, command=lambda: self.upgrade_building("storehouse")
+            self,
+            text="Upgrade",
+            height=1,
+            command=lambda: self.upgrade_building("storehouse"),
         )
 
         self.productionAmount = labels.InputLabel(
@@ -42,13 +51,20 @@ class ConstructionFrame(tkinter.Frame):
         self.feedbackLabel = labels.InputLabel(self, feedback)
         self.feedbackLabel.place(x=300, y=350)
 
-
     def update_data(self):
         self.buildingLevels = self.parent.backend.get_buildings()
-        self.farmhouseUpgradeLabel.config(text=f'Farmhouse Level: {self.buildingLevels["farmhouse_level"]}')
-        self.bakeryUpgradeLabel.config(text=f'Bakery Level: {self.buildingLevels["bakery_level"]}')
-        self.storehouseUpgradeLabel.config(text=f'Storehouse Level: {self.buildingLevels["storehouse_level"]}')
-        self.productionAmount.config(text=f'Food Production: {self.buildingLevels["production"]}')
+        self.farmhouseUpgradeLabel.config(
+            text=f'Farmhouse Level: {self.buildingLevels["farmhouse_level"]}'
+        )
+        self.bakeryUpgradeLabel.config(
+            text=f'Bakery Level: {self.buildingLevels["bakery_level"]}'
+        )
+        self.storehouseUpgradeLabel.config(
+            text=f'Storehouse Level: {self.buildingLevels["storehouse_level"]}'
+        )
+        self.productionAmount.config(
+            text=f'Food Production: {self.buildingLevels["production"]}'
+        )
 
     def upgrade_building(self, building_type: str) -> None:
         self.upgradeResponse = self.parent.backend.upgrade_building(building_type, "1")

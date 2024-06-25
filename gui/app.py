@@ -15,7 +15,6 @@ from gui.frames.api_key import APIKeyFrame
 from gui.frames.empty_frame import EmptyFrame
 from gui.frames.outposts import OutpostsFrame
 from gui.frames.market import MarketFrame
-from gui.components import labels
 
 
 def resource_path(asset_path: str) -> str:
