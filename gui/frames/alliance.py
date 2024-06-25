@@ -67,16 +67,26 @@ class AllianceFrame(tkinter.Frame):
     def update_alliance_name(self):
         name = self.allianceNameUpdateField.get()
 
-        self.parent.backend.update_alliance_name(name)
+        response = self.parent.backend.update_alliance_name(name)
+        if response["success"] == False:
+            self.show_feedback(response["detail"])
 
         self.update_data()
 
     def update_alliance_user_limit(self):
         user_limit = self.allianceUserLimitUpdateField.get()
 
-        self.parent.backend.update_alliance_user_limit(int(user_limit))
+        response = self.parent.backend.update_alliance_user_limit(int(user_limit))
+        if response["success"] == False:
+            self.show_feedback(response["detail"])
 
         self.update_data()
+
+    def show_feedback(self, feedback: str) -> None:
+        self.feedbackLabel = labels.InputLabel(
+            self, feedback
+        )
+        self.feedbackLabel.place(x=300, y=350)
 
     def render(self):
         self.label.grid(row=0, column=0)
