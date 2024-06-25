@@ -4,7 +4,8 @@ from gui.components import labels, buttons
 
 class Sidebar(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent, width=150, height=600, bg="#BEB7A4")
+        self.bg = "#BEB7A4"
+        super().__init__(parent, width=150, height=600, bg=self.bg)
         self.parent = parent
 
         self.title = labels.SidebarLabel(self, text="Sidebar")
@@ -70,6 +71,30 @@ class Sidebar(tkinter.Frame):
             command=lambda: self.switch_frame(self.parent.api_key_frame),
         )
         self.apiKey_button.pack()
+        self.version_label = labels.InputLabel(self, text="v0.2.0-alpha (Dev)", font=("Arial", 10))
+        self.version_label.place(x=0, y=580)
+
+    def disable_option(self, button: str) -> None:
+        if button == "npc":
+            btn = self.npc_button
+        elif button == "attack":
+            btn = self.attack_button
+        elif button == "construction":
+            btn = self.construction_button
+        elif button == "recruitment":
+            btn = self.recruitment_button
+        elif button == "alliance":
+            btn = self.alliance_button
+        elif button == "lookup":
+            btn = self.lookup_button
+        elif button == "outposts":
+            btn = self.outposts_button
+        elif button == "apiKey":
+            btn = self.apiKey_button
+
+        if btn: # type: ignore
+            btn.pack_forget()
+
 
     def switch_frame(self, frame):
         self.master.change_frame(frame)  # type: ignore # this seems to be right? I'm not sure why it's throwing an error with pyright

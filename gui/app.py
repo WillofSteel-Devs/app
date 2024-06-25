@@ -15,6 +15,7 @@ from gui.frames.api_key import APIKeyFrame
 from gui.frames.empty_frame import EmptyFrame
 from gui.frames.outposts import OutpostsFrame
 from gui.frames.market import MarketFrame
+from gui.components import labels
 
 
 def resource_path(asset_path: str) -> str:
@@ -47,6 +48,7 @@ class App(tkinter.Tk):
     def build_app(self, destroy: bool = False) -> None:
         if destroy:
             self.current_frame.place_forget()
+
         self.sidebar = Sidebar(self)
         self.sidebar.place(x=0, y=0, height=600, width=150)
         self.attack_frame = AttackFrame(self)
