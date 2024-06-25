@@ -59,16 +59,24 @@ class AllianceFrame(tkinter.Frame):
     def update_data(self):
         self.allianceData = self.parent.backend.get_alliance()
         self.allianceNameLabel.config(text=f"Alliance: {self.allianceData.name}")
-        self.allianceOwnerLabel.config(text=f"Owner (Discord ID): {self.allianceData.owner}")
-        self.allianceUserLimitLabel.config(text=f'User Limit: {"{:,}".format(self.allianceData.user_limit)}')
-        self.allianceBankBalanceLabel.config(text=f'Bank Balance: {"{:,}".format(self.allianceData.bank)}')
-        self.allianceCreationTimestamp.config(text=f"Alliance Creation Timestamp: {self.allianceData.created_at}")
+        self.allianceOwnerLabel.config(
+            text=f"Owner (Discord ID): {self.allianceData.owner}"
+        )
+        self.allianceUserLimitLabel.config(
+            text=f'User Limit: {"{:,}".format(self.allianceData.user_limit)}'
+        )
+        self.allianceBankBalanceLabel.config(
+            text=f'Bank Balance: {"{:,}".format(self.allianceData.bank)}'
+        )
+        self.allianceCreationTimestamp.config(
+            text=f"Alliance Creation Timestamp: {self.allianceData.created_at}"
+        )
 
     def update_alliance_name(self):
         name = self.allianceNameUpdateField.get()
 
         response = self.parent.backend.update_alliance_name(name)
-        if response["success"] == False:
+        if not response["success"]:
             self.show_feedback(response["detail"])
 
         self.update_data()
@@ -77,15 +85,13 @@ class AllianceFrame(tkinter.Frame):
         user_limit = self.allianceUserLimitUpdateField.get()
 
         response = self.parent.backend.update_alliance_user_limit(int(user_limit))
-        if response["success"] == False:
+        if not response["success"]:
             self.show_feedback(response["detail"])
 
         self.update_data()
 
     def show_feedback(self, feedback: str) -> None:
-        self.feedbackLabel = labels.InputLabel(
-            self, feedback
-        )
+        self.feedbackLabel = labels.InputLabel(self, feedback)
         self.feedbackLabel.place(x=300, y=350)
 
     def render(self):

@@ -1,6 +1,7 @@
 import tkinter
 from ..components import labels, containers, buttons, popups
 
+
 class OutpostsFrame(tkinter.Frame):
     def __init__(self, parent):
         super().__init__(parent, width=650, height=600, bg="pink")
@@ -35,7 +36,7 @@ class OutpostsFrame(tkinter.Frame):
         for i, outpost in enumerate(self.outpostsList):
             x = 30 + (i % 3) * (container_width + container_padx)
             y = 100 + (i // 3) * (container_height + 10)
-            
+
             container = containers.SubContainer(
                 self, width=container_width, height=container_height, bg="white"
             )

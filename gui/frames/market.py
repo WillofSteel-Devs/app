@@ -1,7 +1,24 @@
 import tkinter
 from ..components import labels, dropdowns, inputs
 
-VALID_ITEM_TYPES = ["IRON_FRAME", "BAKERY_TOKEN", "FARMHOUSE_TOKEN", "STOREHOUSE_TOKEN", "MORALE_TOKEN", "HEALING_TOKEN", "LUCKYCHARM_TOKEN", "LOOT_TOKEN", "BAKERY_FRAME", "FARMHOUSE_FRAME", "STOREHOUSE_FRAME", "MORALE_FRAME", "HEALING_FRAME", "LUCKYCHARM_FRAME", "LOOT_FRAME"]
+VALID_ITEM_TYPES = [
+    "IRON_FRAME",
+    "BAKERY_TOKEN",
+    "FARMHOUSE_TOKEN",
+    "STOREHOUSE_TOKEN",
+    "MORALE_TOKEN",
+    "HEALING_TOKEN",
+    "LUCKYCHARM_TOKEN",
+    "LOOT_TOKEN",
+    "BAKERY_FRAME",
+    "FARMHOUSE_FRAME",
+    "STOREHOUSE_FRAME",
+    "MORALE_FRAME",
+    "HEALING_FRAME",
+    "LUCKYCHARM_FRAME",
+    "LOOT_FRAME",
+]
+
 
 class MarketFrame(tkinter.Frame):
     def __init__(self, parent, bg="gray"):
@@ -9,18 +26,18 @@ class MarketFrame(tkinter.Frame):
         self.parent = parent
         self.bg = bg
 
-        self.item_selector = dropdowns.Dropdown(
-            self, VALID_ITEM_TYPES
-        )
+        self.item_selector = dropdowns.Dropdown(self, VALID_ITEM_TYPES)
         self.item_selector_label = labels.InputLabel(self, "Item", bg="white")
 
         self.buy_offers = tkinter.Listbox(self, bg=self.bg)
         self.buy_offers_label = labels.InputLabel(self, "Buy Offers", bg="white")
-        
+
         self.sell_offers = tkinter.Listbox(self, bg=self.bg)
         self.sell_offers_label = labels.InputLabel(self, "Sell Offers", bg="white")
 
-        self.refresh_button = tkinter.Button(self, bg="green", text="Refresh", command=self.update_offers)
+        self.refresh_button = tkinter.Button(
+            self, bg="green", text="Refresh", command=self.update_offers
+        )
 
         self.amount = inputs.IntergerOnlyEntry(self, 0, 100)
         self.amount_label = labels.InputLabel(self, "Amount", bg=self.bg)
@@ -31,7 +48,9 @@ class MarketFrame(tkinter.Frame):
         self.instant_buy_button = tkinter.Button(self, bg="green", text="Buy Instantly")
         self.instant_sell_button = tkinter.Button(self, bg="red", text="Sell Instantly")
 
-        self.accept_offer_button = tkinter.Button(self, bg="yellow", text="Accept Offer")
+        self.accept_offer_button = tkinter.Button(
+            self, bg="yellow", text="Accept Offer"
+        )
 
         self.create_offer_button = tkinter.Button(self, bg="green", text="Create Offer")
 
@@ -40,14 +59,14 @@ class MarketFrame(tkinter.Frame):
     def render(self):
         self.item_selector.place(x=100, y=50)
         self.item_selector_label.place(x=100, y=20)
-        
+
         self.buy_offers.place(x=100, y=190)
         self.buy_offers_label.place(x=100, y=160)
         self.sell_offers.place(x=275, y=190)
         self.sell_offers_label.place(x=275, y=160)
-        
+
         self.refresh_button.place(x=500, y=30)
-        
+
         self.amount.place(x=500, y=100)
         self.amount_label.place(x=500, y=80)
 
@@ -65,7 +84,7 @@ class MarketFrame(tkinter.Frame):
         item = self.item_selector.get_selection().get()
         buy_orders = self.parent.backend.get_market_orders(item, "buy")
         sell_orders = self.parent.backend.get_market_orders(item, "sell")
-        
+
         self.buy_offers.delete(0, "end")
         self.sell_offers.delete(0, "end")
         for order in buy_orders:

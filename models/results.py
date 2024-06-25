@@ -1,6 +1,7 @@
 from .units import UnitType
 from typing import NamedTuple
 
+
 class NPCResult(NamedTuple):
     won: bool
     attacker_lost_troops: dict[UnitType, int]

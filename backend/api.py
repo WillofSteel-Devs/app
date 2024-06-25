@@ -56,7 +56,7 @@ class API:
         route = Route("/alliance", "GET")
         response = self.request(route)
         data = response.json()
-        if data["success"] == False:
+        if not data["success"]:
             return None
 
         alliance = Alliance.from_data(data)
@@ -87,10 +87,7 @@ class API:
 
     def get_market_orders(self, item: str, order_type: str) -> list[MarketOrder | None]:
         route = Route("/market", "GET")
-        query_params = {
-            "item_type": item,
-            "order_type": order_type
-        }
+        query_params = {"item_type": item, "order_type": order_type}
         response = self.request(route, query_params=query_params)
         orders = response.json()["orders"]
         orders = [MarketOrder.from_data(order) for order in orders.values()]

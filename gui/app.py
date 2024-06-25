@@ -15,14 +15,15 @@ from gui.frames.api_key import APIKeyFrame
 from gui.frames.empty_frame import EmptyFrame
 from gui.frames.outposts import OutpostsFrame
 from gui.frames.market import MarketFrame
-from gui.components import labels
+
 
 def resource_path(asset_path: str) -> str:
     try:
-        base_path = sys._MEIPASS2 # type: ignore
+        base_path = sys._MEIPASS2  # type: ignore
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, asset_path)
+
 
 class App(tkinter.Tk):
     def __init__(self):
@@ -56,7 +57,7 @@ class App(tkinter.Tk):
         self.construction_frame = ConstructionFrame(self)
         self.alliance_frame = AllianceFrame(self)
         self.settings_frame = SettingsFrame(self)
-        self.api_key_frame = APIKeyFrame(self)
+        self.api_key_frame = APIKeyFrame(self, sidebar=True)
         self.outposts_frame = OutpostsFrame(self)
         self.market_frame = MarketFrame(self)
         self.current_frame = EmptyFrame(self)
@@ -75,7 +76,10 @@ class App(tkinter.Tk):
                 api_key = f.read()
                 self.backend = API(api_key)
                 valid = self.backend.verify_key()
-                return api_key if valid else False
+                if valid:
+                    return api_key
+                else:
+                    return False
         except FileNotFoundError:
             return False
 

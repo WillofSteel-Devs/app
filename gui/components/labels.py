@@ -14,6 +14,11 @@ class SidebarLabel(tkinter.Label):
         )
 
 
+class FullWidthLabel(tkinter.Label):
+    def __init__(self, parent, text):
+        super().__init__(parent, text=text, width=50, height=2, font=("Helvetica", 20))
+
+
 class FrameLabel(tkinter.Label):
     def __init__(self, parent, text):
         super().__init__(parent, text=text, width=42, height=2, font=("Helvetica", 20))

@@ -4,23 +4,31 @@ import os
 from ..components import labels, inputs, buttons
 from backend.api import API
 
+
 def resource_path(asset_path: str) -> str:
     try:
-        base_path = sys._MEIPASS2 # type: ignore
+        base_path = sys._MEIPASS2  # type: ignore
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, asset_path)
 
+
 class APIKeyFrame(tkinter.Frame):
-    def __init__(self, parent):
+    def __init__(self, parent, sidebar=False):
+        self.sidebar = sidebar
+
         self.bg = "yellow"
         super().__init__(parent, bg=self.bg)
         self.parent = parent
 
-        self.label = labels.FrameLabel(self, "API Key")
+        if self.sidebar:
+            self.label = labels.FrameLabel(self, "API Key")
+        else:
+            self.label = labels.FullWidthLabel(self, "API Key")
 
         self.apikeyentrylabel = labels.InputLabel(self, "Enter API Key:")
         self.apikeyentry = inputs.TextInput(self)
+        self.apikeyentry.insert(0, self.parent.backend.api_key)
         self.apikeysubmit = buttons.SubmitButton(
             self, text="Submit", width=10, height=1, command=self.submit_api_key
         )

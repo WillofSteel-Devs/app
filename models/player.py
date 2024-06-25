@@ -6,7 +6,8 @@ from .alliance import Alliance
 
 __all__ = ("Player", "EventPlayer")
 
- # For handling the edge-case where the date returned by the api is null, most likely to occur with last_npc_win
+
+# For handling the edge-case where the date returned by the api is null, most likely to occur with last_npc_win
 def _parse_date(date) -> datetime | None:
     if date is None:
         return None
@@ -15,6 +16,7 @@ def _parse_date(date) -> datetime | None:
         date = datetime.fromisoformat(date)
     except TypeError:
         return None
+
 
 class Player(NamedTuple):
     id: int
@@ -41,7 +43,7 @@ class Player(NamedTuple):
 
         return Player(
             id=data["user_id"],
-            registered_at=_parse_date(data["registered_at"]), # type: ignore
+            registered_at=_parse_date(data["registered_at"]),  # type: ignore
             gold=data["gold"],
             ruby=data["ruby"],
             units={
