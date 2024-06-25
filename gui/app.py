@@ -31,8 +31,9 @@ class App(tkinter.Tk):
         self.geometry("800x600")
         self.resizable(False, False)
         self.resource_path = resource_path
-        icon_path = resource_path("assets", "img", "logo.ico")
-        self.iconbitmap(icon_path)
+        icon_path = resource_path("assets", "img", "logo.png")
+        photo_image = tkinter.PhotoImage(file=icon_path)
+        self.iconphoto(True, photo_image)
 
         self.api_key = self.verify_api()
         if not self.api_key:
