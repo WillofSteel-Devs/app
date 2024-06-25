@@ -17,35 +17,26 @@ class ConstructionFrame(tkinter.Frame):
             self, f'Farmhouse Level: {self.buildingLevels["farmhouse_level"]}'
         )
         self.farmhouseUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1, command=self.farmhouse_upgrade
+            self, text="Upgrade", height=1, command=lambda: self.upgrade_building("farmhouse")
         )
 
         self.bakeryUpgradeLabel = labels.InputLabel(
             self, f'Bakery Level: {self.buildingLevels["bakery_level"]}'
         )
         self.bakeryUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1, command=self.bakery_upgrade
+            self, text="Upgrade", height=1, command=lambda: self.upgrade_building("bakery")
         )
 
         self.storehouseUpgradeLabel = labels.InputLabel(
             self, f'Storehouse Level: {self.buildingLevels["storehouse_level"]}'
         )
         self.storehouseUpgradeButton = buttons.SubmitButton(
-            self, text="Upgrade", height=1, command=self.storehouse_upgrade
+            self, text="Upgrade", height=1, command=lambda: self.upgrade_building("storehouse")
         )
 
         self.productionAmount = labels.InputLabel(
             self, f'Food Production: {self.buildingLevels["production"]}'
         )
-
-    def farmhouse_upgrade(self) -> None:
-        self.upgrade_building("farmhouse")
-
-    def bakery_upgrade(self) -> None:
-        self.upgrade_building("bakery")
-
-    def storehouse_upgrade(self) -> None:
-        self.upgrade_building("storehouse")
 
     def show_feedback(self, feedback: str) -> None:
         self.feedbackLabel = labels.InputLabel(
