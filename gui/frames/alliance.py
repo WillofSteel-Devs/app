@@ -12,6 +12,9 @@ class AllianceFrame(tkinter.Frame):
         self.parent = parent
 
         self.allianceData = self.parent.backend.get_alliance()
+        if self.allianceData is None:
+            self.parent.sidebar.disable_option("alliance")
+            return
 
         self.label = labels.FrameLabel(self, text="Alliance")
 

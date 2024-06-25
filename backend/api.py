@@ -55,6 +55,8 @@ class API:
         route = Route("/alliance", "GET")
         response = self.request(route)
         data = response.json()
+        if data["success"] == False:
+            return None
 
         alliance = Alliance.from_data(data)
         return alliance

@@ -64,5 +64,27 @@ class Sidebar(tkinter.Frame):
         )
         self.apiKey_button.pack()
 
+    def disable_option(self, button: str) -> None:
+        if button == "npc":
+            button = self.npc_button
+        elif button == "attack":
+            button = self.attack_button
+        elif button == "construction":
+            button = self.construction_button
+        elif button == "recruitment":
+            button = self.recruitment_button
+        elif button == "alliance":
+            button = self.alliance_button
+        elif button == "lookup":
+            button = self.lookup_button
+        elif button == "outposts":
+            button = self.outposts_button
+        elif button == "apiKey":
+            button = self.apiKey_button
+
+        if button:
+            button.pack_forget()
+
+
     def switch_frame(self, frame):
         self.master.change_frame(frame)  # type: ignore # this seems to be right? I'm not sure why it's throwing an error with pyright
