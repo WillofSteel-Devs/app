@@ -16,16 +16,15 @@ class OutpostsFrame(tkinter.Frame):
         response = self.parent.backend.get_outposts()
         return response["outposts"]
 
-    def capture_outpost(self, number):
+    def capture_outpost(self, profile_id: str):
         self.popup = popups.ConfirmPopup(
             self, bg="lightblue", confirmLabelText="Confirm Capture?"
         )
 
         self.wait_window(self.popup)
-        if self.popup.result == "confirmed":
-            print(
-                f"Capture of Outpost {number} Confirmed"
-            )  # TODO implement capture (requires API support)
+        # if self.popup.result == "confirmed":
+            # self.parent.backend.capture_outpost(profile_id)
+            # self.parent.change_frame(OutpostsFrame(self.parent))
 
     def create_outpost_containers(self):
         container_width = 183
@@ -48,7 +47,7 @@ class OutpostsFrame(tkinter.Frame):
                 width=10,
                 height=1,
                 bg="light grey",
-                command=lambda n=i + 1: self.capture_outpost(n),
+                command=lambda: self.capture_outpost(outpost["profile_id"]),
             )
 
             container.place(x=x, y=y)

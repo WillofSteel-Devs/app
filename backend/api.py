@@ -123,3 +123,9 @@ class API:
         print(json)
         response = self.request(route, json=json)
         return NPCResult.from_api(response.json())
+    
+    def capture_outpost(self, profile_id: str) -> None:
+        route = Route("/outpost", "POST")
+        query_params = {"outpost": profile_id}
+        response = self.request(route, query_params=query_params)
+        return response.json()
