@@ -4,7 +4,8 @@ from gui.components import labels, buttons
 
 class Sidebar(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent, width=150, height=600, bg="#BEB7A4")
+        self.bg = "#BEB7A4"
+        super().__init__(parent, width=150, height=600, bg=self.bg)
         self.parent = parent
 
         self.title = labels.SidebarLabel(self, text="Sidebar")
@@ -70,6 +71,9 @@ class Sidebar(tkinter.Frame):
             command=lambda: self.switch_frame(self.parent.api_key_frame),
         )
         self.apiKey_button.pack()
+
+        self.version_label = labels.InputLabel(self, text="v0.2.0-beta1", font=("Arial", 10))
+        self.version_label.place(x=0, y=580)
 
     def switch_frame(self, frame):
         self.master.change_frame(frame)  # type: ignore # this seems to be right? I'm not sure why it's throwing an error with pyright
