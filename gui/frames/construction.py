@@ -4,7 +4,7 @@ from ..components import labels, buttons
 
 class ConstructionFrame(tkinter.Frame):
     def __init__(self, parent):
-        self.bg = "purple"
+        self.bg = "yellow"
         super().__init__(parent, bg=self.bg)
         self.parent = parent
 
@@ -44,13 +44,20 @@ class ConstructionFrame(tkinter.Frame):
         )
         self.feedbackLabel.place(x=300, y=350)
 
+    def update_data(self):
+        self.buildingLevels = self.parent.backend.get_buildings()
+        self.displayBuildingLevels.config(text=f'Buildings:')
+        self.farmhouseUpgradeLabel.config(text=f'Farmhouse Level: {self.buildingLevels["farmhouse_level"]}')
+        self.bakeryUpgradeLabel.config(text=f'Bakery Level: {self.buildingLevels["bakery_level"]}')
+        self.storehouseUpgradeLabel.config(text=f'Storehouse Level: {self.buildingLevels["storehouse_level"]}')
+        self.productionAmount.config(text=f'Food Production: {self.buildingLevels["production"]}')
+
 
     def upgrade_building(self, building_type: str) -> None:
         self.upgradeResponse = self.parent.backend.upgrade_building(building_type, '1')
 
-        frame = ConstructionFrame(self.parent)
-        self.parent.change_frame(frame)  # TODO instead of initialising a new frame, update the current frame
-        frame.show_feedback(self.upgradeResponse["detail"])
+        self.show_feedback(self.upgradeResponse["detail"])
+        self.update_data()
 
     def render(self):
         self.label.grid(row=0, column=0)
