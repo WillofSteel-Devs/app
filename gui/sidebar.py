@@ -71,7 +71,7 @@ class Sidebar(tkinter.Frame):
             command=lambda: self.switch_frame(self.parent.api_key_frame),
         )
         self.apiKey_button.pack()
-        self.version_label = labels.InputLabel(self, text="v0.2.0-beta1", font=("Arial", 10))
+        self.version_label = labels.InputLabel(self, text="v0.2.0-alpha (Dev)", font=("Arial", 10))
         self.version_label.place(x=0, y=580)
 
     def disable_option(self, button: str) -> None:
