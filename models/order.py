@@ -14,7 +14,7 @@ class MarketOrder(NamedTuple):
         if data is None:
             return None
         return MarketOrder(
-            item_id=data["item_id"],
+            item_id=data["item_type"],
             order_type=data["order_type"],
             price=data["price"],
             amount=data["amount"],

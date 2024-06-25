@@ -1,7 +1,15 @@
 import tkinter
+import sys
+import os
 from ..components import labels, inputs, buttons
 from backend.api import API
 
+def resource_path(asset_path: str) -> str:
+    try:
+        base_path = sys._MEIPASS2 # type: ignore
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, asset_path)
 
 class APIKeyFrame(tkinter.Frame):
     def __init__(self, parent):
@@ -18,17 +26,20 @@ class APIKeyFrame(tkinter.Frame):
         )
 
     def submit_api_key(self):
-        api_key = self.apikeyentry.get()
-        backend = API(api_key)
-        valid = backend.verify_key()
-        if valid:
-            with open("API_KEY.txt", "w") as f:
-                f.write(self.apikeyentry.get())
-            self.parent.backend = backend
-            self.parent.build_app()
-        else:
-            self.apikeyentry.delete(0, "end")
-            self.apikeyentry.insert(0, "Invalid API Key")
+        try:
+            api_key = self.apikeyentry.get()
+            backend = API(api_key)
+            valid = backend.verify_key()
+            if valid:
+                with open(resource_path("API_KEY.txt"), "w") as f:
+                    f.write(self.apikeyentry.get())
+                self.parent.backend = backend
+                self.parent.build_app()
+            else:
+                self.apikeyentry.delete(0, "end")
+                self.apikeyentry.insert(0, "Invalid API Key")
+        except Exception as e:
+            self.show_error(str(e))
 
     def show_error(self, error: str):
         label = labels.PopUpLabel(

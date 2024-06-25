@@ -4,7 +4,8 @@ from gui.components import labels, buttons
 
 class Sidebar(tkinter.Frame):
     def __init__(self, parent):
-        super().__init__(parent, width=150, height=600, bg="#BEB7A4")
+        self.bg = "#BEB7A4"
+        super().__init__(parent, width=150, height=600, bg=self.bg)
         self.parent = parent
 
         self.title = labels.SidebarLabel(self, text="Sidebar")
@@ -15,12 +16,12 @@ class Sidebar(tkinter.Frame):
         )
         self.npc_button.pack()
 
-        self.attack_button = buttons.Sidebarbutton(
-            self,
-            text="Attack",
-            command=lambda: self.switch_frame(self.parent.attack_frame),
-        )
-        self.attack_button.pack()
+        # self.attack_button = buttons.Sidebarbutton(
+        #     self,
+        #     text="Attack",
+        #     command=lambda: self.switch_frame(self.parent.attack_frame),
+        # )
+        # self.attack_button.pack()
 
         self.construction_button = buttons.Sidebarbutton(
             self,
@@ -43,12 +44,12 @@ class Sidebar(tkinter.Frame):
         )
         self.alliance_button.pack()
 
-        self.lookup_button = buttons.Sidebarbutton(
-            self,
-            text="Lookup",
-            command=lambda: self.switch_frame(self.parent.lookup_frame),
-        )
-        self.lookup_button.pack()
+        # self.lookup_button = buttons.Sidebarbutton(
+        #     self,
+        #     text="Lookup",
+        #     command=lambda: self.switch_frame(self.parent.lookup_frame),
+        # )
+        # self.lookup_button.pack()
 
         self.outposts_button = buttons.Sidebarbutton(
             self,
@@ -57,12 +58,21 @@ class Sidebar(tkinter.Frame):
         )
         self.outposts_button.pack()
 
+        self.market_button = buttons.Sidebarbutton(
+            self,
+            text="Market",
+            command=lambda: self.switch_frame(self.parent.market_frame),
+        )
+        self.market_button.pack()
+
         self.apiKey_button = buttons.Sidebarbutton(
             self,
             text="API Key",
             command=lambda: self.switch_frame(self.parent.api_key_frame),
         )
         self.apiKey_button.pack()
+        self.version_label = labels.InputLabel(self, text="v0.2.0-beta1", font=("Arial", 10))
+        self.version_label.place(x=0, y=580)
 
     def disable_option(self, button: str) -> None:
         if button == "npc":

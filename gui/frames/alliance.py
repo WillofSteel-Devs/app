@@ -84,8 +84,8 @@ class AllianceFrame(tkinter.Frame):
         # render alliance info
         self.allianceNameLabel.place(x=245, y=100)
         self.allianceOwnerLabel.place(x=245, y=125)
-        self.allianceUserLimitLabel.place(x=310, y=150)
-        self.allianceBankBalanceLabel.place(x=280, y=175)
+        self.allianceUserLimitLabel.place(x=245, y=150)
+        self.allianceBankBalanceLabel.place(x=245, y=175)
 
         # render alliance updating
         self.allianceUpdateLabel.place(x=295, y=225)

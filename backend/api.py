@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import requests
 from .route import Route
-from models import Player, Alliance, MarketOrder
+from models import Player, Alliance, MarketOrder, UnitType, NPCResult
 from .exceptions import AccessForbidden, ValidationError
 
 __all__ = ("API",)
@@ -32,6 +32,7 @@ class API:
             # handle error here however you want to
             # error 403 & 401 are Access Forbidden
         elif response.status_code == 422:
+            print(response.json())
             raise ValidationError(response.status_code, json)
 
         return response
@@ -84,10 +85,15 @@ class API:
         response = self.request(route, query_params=query_params)
         return response
 
-    def get_market_orders(self):
+    def get_market_orders(self, item: str, order_type: str) -> list[MarketOrder | None]:
         route = Route("/market", "GET")
-        response = self.request(route)
-        orders = [MarketOrder.from_data(order) for order in response.json()]
+        query_params = {
+            "item_type": item,
+            "order_type": order_type
+        }
+        response = self.request(route, query_params=query_params)
+        orders = response.json()["orders"]
+        orders = [MarketOrder.from_data(order) for order in orders.values()]
         return orders
 
     def get_outposts(self):
@@ -110,3 +116,10 @@ class API:
 
         response = self.request(route, query_params=query_params)
         return response.json()
+
+    def attack_npc(self, troops: dict[UnitType, int]) -> NPCResult | None:
+        route = Route("/npc", "POST")
+        json = {"troops": troops}
+        print(json)
+        response = self.request(route, json=json)
+        return NPCResult.from_api(response.json())

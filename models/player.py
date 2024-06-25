@@ -6,6 +6,15 @@ from .alliance import Alliance
 
 __all__ = ("Player", "EventPlayer")
 
+ # For handling the edge-case where the date returned by the api is null, most likely to occur with last_npc_win
+def _parse_date(date) -> datetime | None:
+    if date is None:
+        return None
+
+    try:
+        date = datetime.fromisoformat(date)
+    except TypeError:
+        return None
 
 class Player(NamedTuple):
     id: int
@@ -32,7 +41,7 @@ class Player(NamedTuple):
 
         return Player(
             id=data["user_id"],
-            registered_at=Player._parse_date(data["registered_at"]),  # type: ignore
+            registered_at=_parse_date(data["registered_at"]), # type: ignore
             gold=data["gold"],
             ruby=data["ruby"],
             units={
@@ -46,7 +55,7 @@ class Player(NamedTuple):
                 UnitType.KINGS_GUARDS: data["units"]["kings_guards"],
             },
             npc_level=data["npc_level"],
-            last_npc_win=Player._parse_date(data["last_npc_win"]),  # type: ignore
+            last_npc_win=_parse_date(data["last_npc_win"]),  # type: ignore
             votes=data["votes"],
             alliance=Alliance.from_data(data["alliance"]),  # type: ignore
             queue_slots=data["queue_slots"],
@@ -57,16 +66,6 @@ class Player(NamedTuple):
             food_stored=data["food_stored"],
             prestige=data["prestige"],
         )
-
-    # For handling the edge-case where the date returned by the api is null, most likely to occur with last_npc_win
-    def _parse_date(self, date) -> datetime | None:
-        if date is None:
-            return None
-
-        try:
-            date = datetime.fromisoformat(date)
-        except TypeError:
-            return None
 
 
 class EventPlayer(NamedTuple):
