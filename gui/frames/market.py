@@ -1,6 +1,8 @@
 import tkinter
 from ..components import labels, dropdowns, inputs
 
+VALID_ITEM_TYPES = ["IRON_FRAME", "BAKERY_TOKEN", "FARMHOUSE_TOKEN", "STOREHOUSE_TOKEN", "MORALE_TOKEN", "HEALING_TOKEN", "LUCKYCHARM_TOKEN", "LOOT_TOKEN", "BAKERY_FRAME", "FARMHOUSE_FRAME", "STOREHOUSE_FRAME", "MORALE_FRAME", "HEALING_FRAME", "LUCKYCHARM_FRAME", "LOOT_FRAME"]
+
 class MarketFrame(tkinter.Frame):
     def __init__(self, parent, bg="gray"):
         super().__init__(parent, width=650, height=600, bg=bg)
@@ -8,7 +10,7 @@ class MarketFrame(tkinter.Frame):
         self.bg = bg
 
         self.item_selector = dropdowns.Dropdown(
-            self, ["IRON_FRAME", "Placeholder Two", "Placeholder Three"]
+            self, VALID_ITEM_TYPES
         )
         self.item_selector_label = labels.InputLabel(self, "Item", bg="white")
 
