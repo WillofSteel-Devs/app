@@ -76,7 +76,7 @@ class AllianceFrame(tkinter.Frame):
         name = self.allianceNameUpdateField.get()
 
         response = self.parent.backend.update_alliance_name(name)
-        if response["success"] == False:
+        if not response["success"]:
             self.show_feedback(response["detail"])
 
         self.update_data()
@@ -85,7 +85,7 @@ class AllianceFrame(tkinter.Frame):
         user_limit = self.allianceUserLimitUpdateField.get()
 
         response = self.parent.backend.update_alliance_user_limit(int(user_limit))
-        if response["success"] == False:
+        if not response["success"]:
             self.show_feedback(response["detail"])
 
         self.update_data()
