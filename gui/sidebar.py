@@ -71,9 +71,30 @@ class Sidebar(tkinter.Frame):
             command=lambda: self.switch_frame(self.parent.api_key_frame),
         )
         self.apiKey_button.pack()
-
         self.version_label = labels.InputLabel(self, text="v0.2.0-beta1", font=("Arial", 10))
         self.version_label.place(x=0, y=580)
+
+    def disable_option(self, button: str) -> None:
+        if button == "npc":
+            btn = self.npc_button
+        elif button == "attack":
+            btn = self.attack_button
+        elif button == "construction":
+            btn = self.construction_button
+        elif button == "recruitment":
+            btn = self.recruitment_button
+        elif button == "alliance":
+            btn = self.alliance_button
+        elif button == "lookup":
+            btn = self.lookup_button
+        elif button == "outposts":
+            btn = self.outposts_button
+        elif button == "apiKey":
+            btn = self.apiKey_button
+
+        if btn: # type: ignore
+            btn.pack_forget()
+
 
     def switch_frame(self, frame):
         self.master.change_frame(frame)  # type: ignore # this seems to be right? I'm not sure why it's throwing an error with pyright
