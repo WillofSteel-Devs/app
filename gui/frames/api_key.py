@@ -4,12 +4,14 @@ import os
 from ..components import labels, inputs, buttons
 from backend.api import API
 
+
 def resource_path(asset_path: str) -> str:
     try:
-        base_path = sys._MEIPASS2 # type: ignore
+        base_path = sys._MEIPASS2  # type: ignore
     except Exception:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, asset_path)
+
 
 class APIKeyFrame(tkinter.Frame):
     def __init__(self, parent, sidebar=False):

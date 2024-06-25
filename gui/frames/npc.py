@@ -2,6 +2,7 @@ import tkinter
 from ..components import labels, buttons, inputs
 from models import UnitType, NPCResult
 
+
 class NPCResultFrame(tkinter.Frame):
     def __init__(self, parent, result: NPCResult):
         self.bg = "orange"
@@ -38,29 +39,48 @@ class NpcFrame(tkinter.Frame):
         big_bowmen = self.player.units[UnitType.BIG_BOWMEN]
         heavy_men = self.player.units[UnitType.HEAVY_MEN]
         king_guards = self.player.units[UnitType.KINGS_GUARDS]
-        self.npcLevelLabel = labels.InputLabel(self, f"Last NPC Level Defeated: {self.player.npc_level}")
+        self.npcLevelLabel = labels.InputLabel(
+            self, f"Last NPC Level Defeated: {self.player.npc_level}"
+        )
 
+        self.troopSelectorLabel = labels.InputLabel(self, "Select Troops:")
+        self.infantryLabel = labels.InputLabel(self, f"Infantry ({infantry}):")
+        self.cavalryLabel = labels.InputLabel(self, f"Cavalry ({cavalry}):")
+        self.artilleryLabel = labels.InputLabel(self, f"Artillery ({artillery}):")
+        self.assassinLabel = labels.InputLabel(self, f"Assassins ({assassins}):")
+        self.bowmenLabel = labels.InputLabel(self, f"Bowmen ({bowmen}):")
+        self.bigBowmenLabel = labels.InputLabel(self, f"Big Bowmen ({big_bowmen}):")
+        self.heavyMenLabel = labels.InputLabel(self, f"Heavy Men ({heavy_men}):")
+        self.kingGuardsLabel = labels.InputLabel(self, f"King Guards ({king_guards}):")
 
-        self.troopSelectorLabel = labels.InputLabel(self, 'Select Troops:')
-        self.infantryLabel = labels.InputLabel(self, f'Infantry ({infantry}):')
-        self.cavalryLabel = labels.InputLabel(self, f'Cavalry ({cavalry}):')
-        self.artilleryLabel = labels.InputLabel(self, f'Artillery ({artillery}):')
-        self.assassinLabel = labels.InputLabel(self, f'Assassins ({assassins}):')
-        self.bowmenLabel = labels.InputLabel(self, f'Bowmen ({bowmen}):')
-        self.bigBowmenLabel = labels.InputLabel(self, f'Big Bowmen ({big_bowmen}):')
-        self.heavyMenLabel = labels.InputLabel(self, f'Heavy Men ({heavy_men}):')
-        self.kingGuardsLabel = labels.InputLabel(self, f'King Guards ({king_guards}):')
+        self.infantryQuantity = inputs.IntergerOnlyEntry(
+            self, minNumber=1, maxNumber=infantry
+        )
+        self.cavalryQuantity = inputs.IntergerOnlyEntry(
+            self, minNumber=1, maxNumber=cavalry
+        )
+        self.artilleryQuantity = inputs.IntergerOnlyEntry(
+            self, minNumber=1, maxNumber=artillery
+        )
+        self.assassinsQuantity = inputs.IntergerOnlyEntry(
+            self, minNumber=1, maxNumber=assassins
+        )
+        self.bowmenQuantity = inputs.IntergerOnlyEntry(
+            self, minNumber=1, maxNumber=bowmen
+        )
+        self.bigBowmenQuantity = inputs.IntergerOnlyEntry(
+            self, minNumber=1, maxNumber=big_bowmen
+        )
+        self.heavyMenQuantity = inputs.IntergerOnlyEntry(
+            self, minNumber=1, maxNumber=heavy_men
+        )
+        self.kingGuardsQuantity = inputs.IntergerOnlyEntry(
+            self, minNumber=1, maxNumber=king_guards
+        )
 
-        self.infantryQuantity = inputs.IntergerOnlyEntry(self, minNumber=1, maxNumber=infantry)
-        self.cavalryQuantity = inputs.IntergerOnlyEntry(self, minNumber=1, maxNumber=cavalry)
-        self.artilleryQuantity = inputs.IntergerOnlyEntry(self, minNumber=1, maxNumber=artillery)
-        self.assassinsQuantity = inputs.IntergerOnlyEntry(self, minNumber=1, maxNumber=assassins)
-        self.bowmenQuantity = inputs.IntergerOnlyEntry(self, minNumber=1, maxNumber=bowmen)
-        self.bigBowmenQuantity = inputs.IntergerOnlyEntry(self, minNumber=1, maxNumber=big_bowmen)
-        self.heavyMenQuantity = inputs.IntergerOnlyEntry(self, minNumber=1, maxNumber=heavy_men)
-        self.kingGuardsQuantity = inputs.IntergerOnlyEntry(self, minNumber=1, maxNumber=king_guards)
-
-        self.npcAttackButton = buttons.SubmitButton(self, text='Attack', height=2, width=6, command=self.attack_npc)
+        self.npcAttackButton = buttons.SubmitButton(
+            self, text="Attack", height=2, width=6, command=self.attack_npc
+        )
 
     def attack_npc(self):
         infantry = self.infantryQuantity.get()
@@ -99,7 +119,7 @@ class NpcFrame(tkinter.Frame):
         self.bigBowmenLabel.place(x=167, y=300)
         self.heavyMenLabel.place(x=174, y=325)
         self.kingGuardsLabel.place(x=170, y=350)
-        
+
         self.infantryQuantity.place(x=260, y=175)
         self.cavalryQuantity.place(x=260, y=200)
         self.artilleryQuantity.place(x=260, y=225)
