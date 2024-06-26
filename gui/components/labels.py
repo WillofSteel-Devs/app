@@ -28,7 +28,7 @@ class InputLabel(tkinter.Label):
     def __init__(self, parent, text, bg=None, *args, **kwargs):
         if bg is None:
             bg = parent.bg
-        super().__init__(parent, text=text, bg=bg, *args, **kwargs)
+        super().__init__(parent, text=text, bg=bg, anchor="e", *args, **kwargs)
 
 
 class PopUpLabel(tkinter.Label):
