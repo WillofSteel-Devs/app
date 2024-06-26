@@ -44,14 +44,14 @@ class NpcFrame(tkinter.Frame):
         )
 
         self.troopSelectorLabel = labels.InputLabel(self, "Select Troops:")
-        self.infantryLabel = labels.InputLabel(self, f'Infantry ({"{:,}".format(infantry)}):')
-        self.cavalryLabel = labels.InputLabel(self, f'Cavalry ({"{:,}".format(cavalry)}):')
-        self.artilleryLabel = labels.InputLabel(self, f'Artillery ({"{:,}".format(artillery)}):')
-        self.assassinLabel = labels.InputLabel(self, f'Assassins ({"{:,}".format(assassins)}):')
-        self.bowmenLabel = labels.InputLabel(self, f'Bowmen ({"{:,}".format(bowmen)}):')
-        self.bigBowmenLabel = labels.InputLabel(self, f'Big Bowmen ({"{:,}".format(big_bowmen)}):')
-        self.heavyMenLabel = labels.InputLabel(self, f'Heavy Men ({"{:,}".format(heavy_men)}):')
-        self.kingGuardsLabel = labels.InputLabel(self, f'King Guards ({"{:,}".format(king_guards)}):')
+        self.infantryLabel = labels.InputLabel(self, f'Infantry ({infantry:,}):')
+        self.cavalryLabel = labels.InputLabel(self, f'Cavalry ({cavalry:,}):')
+        self.artilleryLabel = labels.InputLabel(self, f'Artillery ({artillery:,}):')
+        self.assassinLabel = labels.InputLabel(self, f'Assassins ({assassins:,}):')
+        self.bowmenLabel = labels.InputLabel(self, f'Bowmen ({bowmen:,}):')
+        self.bigBowmenLabel = labels.InputLabel(self, f'Big Bowmen ({big_bowmen:,}):')
+        self.heavyMenLabel = labels.InputLabel(self, f'Heavy Men ({heavy_men:,}):')
+        self.kingGuardsLabel = labels.InputLabel(self, f'King Guards ({king_guards:,}):')
 
         self.infantryQuantity = inputs.IntergerOnlyEntry(
             self, minNumber=1, maxNumber=infantry
