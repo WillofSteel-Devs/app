@@ -2,17 +2,19 @@ import tkinter
 
 
 class TextInput(tkinter.Entry):
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, width=50, *args, **kwargs):
         super().__init__(
             parent,
-            width=50,
+            width=width,
             *args,
             **kwargs,
         )
 
 
 class IntergerOnlyEntry(tkinter.Entry):
-    def __init__(self, parent, minNumber=None, maxNumber=None, width=50, *args, **kwargs):
+    def __init__(
+        self, parent, minNumber=None, maxNumber=None, width=50, *args, **kwargs
+    ):
         self.minNumber = minNumber
         self.maxNumber = maxNumber
 

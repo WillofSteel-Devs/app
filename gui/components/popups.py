@@ -56,6 +56,7 @@ class ConfirmPopup(tkinter.Toplevel):
         self.result = "cancelled"
         self.destroy()
 
+
 class SelectArmy(tkinter.Toplevel):
     def __init__(self, parent, bg=None):
         self.parent = parent
@@ -68,10 +69,7 @@ class SelectArmy(tkinter.Toplevel):
         self.grab_set()
         self.attributes("-topmost", True)
 
-
-        self.select_label = labels.InputLabel(
-            self, text='Select Army', bg=bg
-        )
+        self.select_label = labels.InputLabel(self, text="Select Army", bg=bg)
 
         self.player = self.parent.parent.backend.get_player()
         infantry = self.player.units[UnitType.INFANTRY]
@@ -83,14 +81,28 @@ class SelectArmy(tkinter.Toplevel):
         heavy_men = self.player.units[UnitType.HEAVY_MEN]
         king_guards = self.player.units[UnitType.KINGS_GUARDS]
 
-        self.infantryLabel = labels.InputLabel(self, f"Infantry ({'{:,}'.format(infantry)}):")
-        self.cavalryLabel = labels.InputLabel(self, f"Cavalry ({'{:,}'.format(cavalry)}):")
-        self.artilleryLabel = labels.InputLabel(self, f"Artillery ({'{:,}'.format(artillery)}):")
-        self.assassinLabel = labels.InputLabel(self, f"Assassins ({'{:,}'.format(assassins)}):")
+        self.infantryLabel = labels.InputLabel(
+            self, f"Infantry ({'{:,}'.format(infantry)}):"
+        )
+        self.cavalryLabel = labels.InputLabel(
+            self, f"Cavalry ({'{:,}'.format(cavalry)}):"
+        )
+        self.artilleryLabel = labels.InputLabel(
+            self, f"Artillery ({'{:,}'.format(artillery)}):"
+        )
+        self.assassinLabel = labels.InputLabel(
+            self, f"Assassins ({'{:,}'.format(assassins)}):"
+        )
         self.bowmenLabel = labels.InputLabel(self, f"Bowmen ({'{:,}'.format(bowmen)}):")
-        self.bigBowmenLabel = labels.InputLabel(self, f"Big Bowmen ({'{:,}'.format(big_bowmen)}):")
-        self.heavyMenLabel = labels.InputLabel(self, f"Heavy Men ({'{:,}'.format(heavy_men)}):")
-        self.kingGuardsLabel = labels.InputLabel(self, f"King Guards ({'{:,}'.format(king_guards)}):")
+        self.bigBowmenLabel = labels.InputLabel(
+            self, f"Big Bowmen ({'{:,}'.format(big_bowmen)}):"
+        )
+        self.heavyMenLabel = labels.InputLabel(
+            self, f"Heavy Men ({'{:,}'.format(heavy_men)}):"
+        )
+        self.kingGuardsLabel = labels.InputLabel(
+            self, f"King Guards ({'{:,}'.format(king_guards)}):"
+        )
 
         self.infantryQuantity = inputs.IntergerOnlyEntry(
             self, minNumber=1, maxNumber=infantry, width=22
@@ -118,12 +130,7 @@ class SelectArmy(tkinter.Toplevel):
         )
 
         self.submit_button = buttons.SubmitButton(
-            self,
-            text="Capture",
-            bg=bg,
-            height=1,
-            width=7,
-            command=self.submit
+            self, text="Capture", bg=bg, height=1, width=7, command=self.submit
         )
 
         # render
@@ -149,5 +156,16 @@ class SelectArmy(tkinter.Toplevel):
         self.submit_button.place(x=130, y=300)
 
     def submit(self):
-        self.result = "confirmed"
+        self.result = {
+            "troops": {
+                "infantry": int(self.infantryQuantity.get()),
+                "cavalry": int(self.cavalryQuantity.get()),
+                "artillery": int(self.artilleryQuantity.get()),
+                "assassins": int(self.infantryQuantity.get()),
+                "bowmen": int(self.assassinsQuantity.get()),
+                "big_bowmen": int(self.bigBowmenQuantity.get()),
+                "heavy_men": int(self.heavyMenQuantity.get()),
+                "king_guards": int(self.kingGuardsQuantity.get()),
+            }
+        }
         self.destroy()
