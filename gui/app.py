@@ -15,6 +15,7 @@ from gui.frames.api_key import APIKeyFrame
 from gui.frames.empty_frame import EmptyFrame
 from gui.frames.outposts import OutpostsFrame
 from gui.frames.market import MarketFrame
+from gui.frames.imgframe import ImageFrame
 
 
 def resource_path(*args) -> str:
@@ -29,7 +30,7 @@ class App(tkinter.Tk):
     def __init__(self):
         tkinter.Tk.__init__(self)
         self.title("Will of Steel")
-        self.geometry("800x600")
+        self.geometry("1500x900")
         self.resizable(False, False)
         self.resource_path = resource_path
         icon_path = resource_path("assets", "img", "logo.png")
@@ -48,19 +49,25 @@ class App(tkinter.Tk):
     def build_app(self, destroy: bool = False) -> None:
         if destroy:
             self.current_frame.place_forget()
+        self.wm_attributes("-transparentcolor", "black")
 
-        self.sidebar = Sidebar(self)
-        self.sidebar.place(x=0, y=0, height=600, width=150)
-        self.attack_frame = AttackFrame(self)
-        self.lookup_frame = LookupFrame(self)
-        self.npc_frame = NpcFrame(self)
-        self.recruitment_frame = RecruitmentFrame(self)
-        self.construction_frame = ConstructionFrame(self)
-        self.alliance_frame = AllianceFrame(self)
-        self.settings_frame = SettingsFrame(self)
-        self.api_key_frame = APIKeyFrame(self, sidebar=True)
-        self.outposts_frame = OutpostsFrame(self)
-        self.market_frame = MarketFrame(self)
+        self.imageframe = ImageFrame(self)
+        self.imageframe.place(x=0, y=0, height=600, width=1500)
+        self.imageframe.render()    
+
+
+        # self.sidebar = Sidebar(self)
+        # self.sidebar.place(x=0, y=0, height=600, width=150)
+        # self.attack_frame = AttackFrame(self)
+        # self.lookup_frame = LookupFrame(self)
+        # self.npc_frame = NpcFrame(self)
+        # self.recruitment_frame = RecruitmentFrame(self)
+        # self.construction_frame = ConstructionFrame(self)
+        # self.alliance_frame = AllianceFrame(self)
+        # self.settings_frame = SettingsFrame(self)
+        # self.api_key_frame = APIKeyFrame(self, sidebar=True)
+        # self.outposts_frame = OutpostsFrame(self)
+        # self.market_frame = MarketFrame(self)
         self.current_frame = EmptyFrame(self)
         self.current_frame.place(x=150, y=0, height=600, width=650)
         self.current_frame.render()

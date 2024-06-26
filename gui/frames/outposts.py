@@ -21,7 +21,8 @@ class OutpostsFrame(tkinter.Frame):
         self.army_selection_popup = popups.SelectArmy(self, bg="lightblue")
 
         self.wait_window(self.army_selection_popup)
-        self.capture_army = self.army_selection_popup.result  # returns dic of troops to be sent to capture outpost (theoretically pre-verified?)
+        if self.army_selection_popup.result:
+            self.army = self.army_selection_popup.result
 
     def create_outpost_containers(self):
         container_width = 183
