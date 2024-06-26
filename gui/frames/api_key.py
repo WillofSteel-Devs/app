@@ -29,9 +29,6 @@ class APIKeyFrame(tkinter.Frame):
         self.apikeyentrylabel = labels.InputLabel(self, "Enter API Key:")
         self.apikeyentry = inputs.TextInput(self)
 
-        if self.parent.backend.api_key:
-            self.apikeyentry.insert(0, self.parent.backend.api_key)
-
         self.apikeysubmit = buttons.SubmitButton(
             self, text="Submit", width=10, height=1, command=self.submit_api_key
         )
