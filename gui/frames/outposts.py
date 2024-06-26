@@ -18,15 +18,10 @@ class OutpostsFrame(tkinter.Frame):
         return response["outposts"]
 
     def capture_outpost(self, number):
-        self.popup = popups.ConfirmPopup(
-            self, bg="lightblue", confirmLabelText="Confirm Capture?"
-        )
+        self.army_selection_popup = popups.SelectArmy(self, bg="lightblue")
 
-        self.wait_window(self.popup)
-        if self.popup.result == "confirmed":
-            print(
-                f"Capture of Outpost {number} Confirmed"
-            )  # TODO implement capture (requires API support)
+        self.wait_window(self.army_selection_popup)
+        self.capture_army = self.army_selection_popup.result  # returns dic of troops to be sent to capture outpost (theoretically pre-verified?)
 
     def create_outpost_containers(self):
         container_width = 183

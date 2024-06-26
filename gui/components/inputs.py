@@ -2,23 +2,25 @@ import tkinter
 
 
 class TextInput(tkinter.Entry):
-    def __init__(self, parent, *args, **kwargs):
+    def __init__(self, parent, width=50, *args, **kwargs):
         super().__init__(
             parent,
-            width=50,
+            width=width,
             *args,
             **kwargs,
         )
 
 
 class IntergerOnlyEntry(tkinter.Entry):
-    def __init__(self, parent, minNumber=None, maxNumber=None, *args, **kwargs):
+    def __init__(
+        self, parent, minNumber=None, maxNumber=None, width=50, *args, **kwargs
+    ):
         self.minNumber = minNumber
         self.maxNumber = maxNumber
 
         self.var = tkinter.StringVar()
 
-        super().__init__(parent, width=50, textvariable=self.var, *args, **kwargs)
+        super().__init__(parent, width=width, textvariable=self.var, *args, **kwargs)
 
         self.validate_command = (self.register(self.validate_input), "%P")
 
