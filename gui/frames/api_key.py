@@ -42,7 +42,7 @@ class APIKeyFrame(tkinter.Frame):
                 with open(resource_path("API_KEY.txt"), "w") as f:
                     f.write(self.apikeyentry.get())
                 self.parent.backend = backend
-                self.parent.build_app()
+                self.parent.build_app(True)
             else:
                 self.apikeyentry.delete(0, "end")
                 self.apikeyentry.insert(0, "Invalid API Key")
