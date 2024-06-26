@@ -1,6 +1,7 @@
 import tkinter
 from ..components import labels, buttons, inputs
 from models import UnitType, NPCResult
+import app
 
 
 class NPCResultFrame(tkinter.Frame):
@@ -14,13 +15,39 @@ class NPCResultFrame(tkinter.Frame):
         self.result = result
 
         self.resultLabel = labels.InputLabel(self, f"Won: {self.result.won}")
+        self.back_Button = buttons.SubmitButton(self, "Back", height = 3, command = self.update_data)
         # display lost troops & gained resources etc
+
+    def update_data(self):
+        self.parent.change_frame(self.parent.npc_frame)
+        self.player = self.parent.backend.get_player()
+
+        infantry = self.player.units[UnitType.INFANTRY]
+        cavalry = self.player.units[UnitType.CAVALRY]
+        artillery = self.player.units[UnitType.ARTILLERY]
+        assassins = self.player.units[UnitType.ASSASSINS]
+        bowmen = self.player.units[UnitType.BOWMEN]
+        big_bowmen = self.player.units[UnitType.BIG_BOWMEN]
+        heavy_men = self.player.units[UnitType.HEAVY_MEN]
+        king_guards = self.player.units[UnitType.KINGS_GUARDS]
+        self.npcLevelLabel = labels.InputLabel(
+            self, f"Last NPC Level Defeated: {self.player.npc_level}"
+        )
+
+        self.parent.npc_frame.infantryLabel.config(text = f'Infantry ({infantry:,}):', width = 21)
+        self.parent.npc_frame.cavalryLabel.config(text = f'Cavalry ({cavalry:,}):', width = 21)
+        self.parent.npc_frame.artilleryLabel.config(text = f'Artillery ({artillery:,}):', width = 21)
+        self.parent.npc_frame.assassinLabel.config(text = f'Assassins ({assassins:,}):', width = 21)
+        self.parent.npc_frame.bowmenLabel.config(text = f'Bowmen ({bowmen:,}):', width = 21)
+        self.parent.npc_frame.bigBowmenLabel.config(text = f'Big Bowmen ({big_bowmen:,}):', width = 21)
+        self.parent.npc_frame.heavyMenLabel.config(text = f'Heavy Men ({heavy_men:,}):', width = 21)
+        self.parent.npc_frame.kingGuardsLabel.config(text = f'King Guards ({king_guards:,}):', width = 21)
 
     def render(self):
         self.label.grid(row=0, column=0)
 
         self.resultLabel.place(x=300, y=150)
-
+        self.back_Button.place(x=100, y=200)
 
 class NpcFrame(tkinter.Frame):
     def __init__(self, parent):
