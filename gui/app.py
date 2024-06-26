@@ -17,12 +17,12 @@ from gui.frames.outposts import OutpostsFrame
 from gui.frames.market import MarketFrame
 
 
-def resource_path(asset_path: str) -> str:
+def resource_path(*args) -> str:
     try:
         base_path = sys._MEIPASS2  # type: ignore
     except Exception:
         base_path = os.path.abspath(".")
-    return os.path.join(base_path, asset_path)
+    return os.path.join(base_path, *args)
 
 
 class App(tkinter.Tk):
@@ -32,8 +32,9 @@ class App(tkinter.Tk):
         self.geometry("800x600")
         self.resizable(False, False)
         self.resource_path = resource_path
-        icon_path = resource_path("assets\\img\\logo.ico")
-        self.iconbitmap(icon_path)
+        icon_path = resource_path("assets", "img", "logo.png")
+        photo_image = tkinter.PhotoImage(file=icon_path)
+        self.iconphoto(True, photo_image)
 
         self.api_key = self.verify_api()
         if not self.api_key:
