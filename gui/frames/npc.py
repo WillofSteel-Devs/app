@@ -2,7 +2,6 @@ import tkinter
 from ..components import labels, buttons, inputs
 from models import UnitType, NPCResult
 
-
 class NPCResultFrame(tkinter.Frame):
     def __init__(self, parent, result: NPCResult):
         self.bg = "orange"
