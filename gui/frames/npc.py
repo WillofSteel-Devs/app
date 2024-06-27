@@ -1,7 +1,6 @@
 import tkinter
 from ..components import labels, buttons, inputs
 from models import UnitType, NPCResult
-import app
 
 
 class NPCResultFrame(tkinter.Frame):
@@ -42,6 +41,17 @@ class NPCResultFrame(tkinter.Frame):
         self.parent.npc_frame.bigBowmenLabel.config(text = f'Big Bowmen ({big_bowmen:,}):', width = 21)
         self.parent.npc_frame.heavyMenLabel.config(text = f'Heavy Men ({heavy_men:,}):', width = 21)
         self.parent.npc_frame.kingGuardsLabel.config(text = f'King Guards ({king_guards:,}):', width = 21)
+
+        self.value = tkinter.StringVar(value = "")
+
+        self.parent.npc_frame.infantryQuantity.config(textvariable = self.value)
+        self.parent.npc_frame.cavalryQuantity.config(textvariable = self.value)
+        self.parent.npc_frame.artilleryQuantity.config(textvariable = self.value)
+        self.parent.npc_frame.assassinsQuantity.config(textvariable = self.value)
+        self.parent.npc_frame.bowmenQuantity.config(textvariable = self.value)
+        self.parent.npc_frame.bigBowmenQuantity.config(textvariable = self.value)
+        self.parent.npc_frame.heavyMenQuantity.config(textvariable = self.value)
+        self.parent.npc_frame.kingGuardsQuantity.config(textvariable = self.value)
 
     def render(self):
         self.label.grid(row=0, column=0)
