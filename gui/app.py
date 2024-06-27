@@ -1,8 +1,12 @@
 import tkinter
 import os
 import sys
+import asyncio
+import threading
+import atexit
 
 from backend.api import API
+from backend.ws import Websocket
 from gui.sidebar import Sidebar
 from gui.frames.attack import AttackFrame
 from gui.frames.lookup import LookupFrame
@@ -35,6 +39,10 @@ class App(tkinter.Tk):
         icon_path = resource_path("assets", "img", "logo.png")
         photo_image = tkinter.PhotoImage(file=icon_path)
         self.iconphoto(True, photo_image)
+
+        # self._ws = Websocket("wss://api.willofsteel.me/ws")
+        self._ws = Websocket("ws://localhost:8765/")
+        self._ws.connect()
 
         self.api_key = self.verify_api()
         if not self.api_key:

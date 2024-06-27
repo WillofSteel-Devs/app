@@ -1,2 +1,1 @@
-aiohttp
-tkinter-async-execute
+websockets
