@@ -27,8 +27,7 @@ class Websocket:
         message = json.loads(message)
         event = message["event"]
         args = message["args"]
-        func = self.listeners.get(event)
-        if func: func(args)
+        for func in self.listeners.get(event): func(*args)
 
     def connect(self):
         with client.connect(self.uri) as ws:
