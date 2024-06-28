@@ -11,28 +11,25 @@ class AllianceFrame(tkinter.Frame):
         super().__init__(parent, width=650, height=600, bg=self.bg)
         self.parent = parent
 
-        self.allianceData = self.parent.backend.get_alliance()
-        if self.allianceData is None:
-            self.parent.sidebar.disable_option("alliance")
-            return
+        self.allianceData = self.parent._ws.get_alliance(self.update_data)
 
         self.label = labels.FrameLabel(self, text="Alliance")
 
         # alliance info
         self.allianceNameLabel = labels.InputLabel(
-            self, f"Alliance: {self.allianceData.name}"
+            self, f"Alliance: N/A"
         )
         self.allianceOwnerLabel = labels.InputLabel(
-            self, f"Owner (Discord ID): {self.allianceData.owner}"
+            self, f"Owner (Discord ID): N/A"
         )
         self.allianceUserLimitLabel = labels.InputLabel(
-            self, f'User Limit: {"{:,}".format(self.allianceData.user_limit)}'
+            self, f'User Limit: N/A'
         )  # includes formating number with commas
         self.allianceBankBalanceLabel = labels.InputLabel(
-            self, f'Bank Balance: {"{:,}".format(self.allianceData.bank)}'
+            self, f'Bank Balance: N/A'
         )  # includes formating number with commas
         self.allianceCreationTimestamp = labels.InputLabel(
-            self, f"Alliance Creation Timestamp: {self.allianceData.created_at}"
+            self, f"Alliance Creation Timestamp: N/A"
         )
 
         # update section
@@ -55,21 +52,26 @@ class AllianceFrame(tkinter.Frame):
             height=1,
             command=self.update_alliance_user_limit,
         )
-
-    def update_data(self):
-        self.allianceData = self.parent.backend.get_alliance()
-        self.allianceNameLabel.config(text=f"Alliance: {self.allianceData.name}")
+ 
+    def update_data(self, args: list) -> None:
+        print("recv", args)
+        owner = args["owner"]
+        name = args["name"]
+        user_limit = args["user_limit"]
+        bank = args["bank"]
+        created_at = args["created_at"]
+        self.allianceNameLabel.config(text=f"Alliance: {name}")
         self.allianceOwnerLabel.config(
-            text=f"Owner (Discord ID): {self.allianceData.owner}"
+            text=f"Owner (Discord ID): {owner}"
         )
         self.allianceUserLimitLabel.config(
-            text=f'User Limit: {"{:,}".format(self.allianceData.user_limit)}'
+            text=f'User Limit: {user_limit}'
         )
         self.allianceBankBalanceLabel.config(
-            text=f'Bank Balance: {"{:,}".format(self.allianceData.bank)}'
+            text=f'Bank Balance: {bank}'
         )
         self.allianceCreationTimestamp.config(
-            text=f"Alliance Creation Timestamp: {self.allianceData.created_at}"
+            text=f"Alliance Creation Timestamp: {created_at}"
         )
 
     def update_alliance_name(self):
